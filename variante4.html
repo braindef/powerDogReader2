@@ -1,0 +1,36 @@
+
+<html>
+		<head>
+		</head>
+		<body>
+		<script>
+
+var xhr=[];
+var count=0;
+
+
+for (i=0; i<1000; i++)
+{
+	xhr[i] = new XMLHttpRequest();
+	xhr[i].open('POST', i+'.txt', true);
+
+	xhr[i].onload = function () {
+		count++;
+		if (count==980) alert(count + " Files Loaded from Server");
+	}; //hier darf man keine parameter übergeben wie (xhr[i], msg) sonst funktioniert das blöde XMLHttpRequest nicht richtig 
+
+	xhr[i].send(null);
+}
+
+
+
+
+		</script>
+		</body>
+</html>
+
+
+B2_A2_S1_global_2_21_2018.txt
+
+
+
