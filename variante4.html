@@ -12,12 +12,25 @@ var count=0;
 
 function printValues()
 {
-	alert (xhr[90].response)
+	//alert (xhr[90].response)
 	var div = document.getElementById('output');
 	
 	var myString = xhr[90].response.split("\n")[0];
-	myString += xhr[90].response.split("\n").length;
+	myString += xhr[90].response.split("\n").length + " <br> ";
 
+	var stringArray = []
+
+	for (i=1; i<xhr.length; i++)
+	{
+		stringArray[i]= xhr[90].response.split("\n")[i] + " <br> " ;
+	}
+
+	stringArray.sort();
+
+	for(i=0; i<stringArray.length; i++)
+	{
+		myString += stringArray[i];
+	}
 
 	div.innerHTML = myString;
 }
@@ -32,7 +45,7 @@ for (i=0; i<100; i++)
 	xhr[i].onload = function () {
 		count++;
 		if (count==94) {
-			alert(count + " Files Loaded from Server");
+			//alert(count + " Files Loaded from Server");
 			printValues();
 		}
 		}; //hier darf man keine parameter übergeben wie (xhr[i], msg) sonst funktioniert das blöde XMLHttpRequest nicht richtig 
