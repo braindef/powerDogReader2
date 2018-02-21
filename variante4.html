@@ -9,15 +9,33 @@ var xhr=[];
 var count=0;
 
 
-for (i=0; i<1000; i++)
+
+function printValues()
+{
+	alert (xhr[90].response)
+	var div = document.getElementById('output');
+	
+	var myString = xhr[90].response.split("\n")[0];
+	myString += xhr[90].response.split("\n").length;
+
+
+	div.innerHTML = myString;
+}
+
+
+
+for (i=0; i<100; i++)
 {
 	xhr[i] = new XMLHttpRequest();
 	xhr[i].open('POST', i+'.txt', true);
 
 	xhr[i].onload = function () {
 		count++;
-		if (count==980) alert(count + " Files Loaded from Server");
-	}; //hier darf man keine parameter übergeben wie (xhr[i], msg) sonst funktioniert das blöde XMLHttpRequest nicht richtig 
+		if (count==94) {
+			alert(count + " Files Loaded from Server");
+			printValues();
+		}
+		}; //hier darf man keine parameter übergeben wie (xhr[i], msg) sonst funktioniert das blöde XMLHttpRequest nicht richtig 
 
 	xhr[i].send(null);
 }
@@ -26,11 +44,15 @@ for (i=0; i<1000; i++)
 
 
 		</script>
+
+		<div id="output">TEST
+		</div>
+
+
 		</body>
 </html>
 
 
-B2_A2_S1_global_2_21_2018.txt
 
 
 
