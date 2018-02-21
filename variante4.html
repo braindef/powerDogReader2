@@ -5,23 +5,28 @@
 		<body>
 		<script>
 
-var nFiles=10;
+
+
+//global variabeln
+var nFiles=5;
 var xhr=[];
 var count=0;
 
+//spaltenbenennung fürs array <-> csv
 var timestamp=0;
-var pac=6;
-var pdc=7;
-var udc=8;
-var temp=9;
+var pac=5;
+var pdc=6;
+var udc=7;
+var temp=8;
+
+
+var totalLength = 0;
 
 
 
-function addValues()
+
+function addCounters()
 {
-	var div = document.getElementById('output');
-	
-	var myString = "";
 	
 	for (i=0; i<nFiles; i++)
 	if (xhr[i].status==200)
@@ -34,23 +39,32 @@ function addValues()
 	{
 		xhr[i]["count"]=0;
 	}
+}
 
-	var totalLength = 0;
+function countTotalRows()
+{
 
 	for (i=0; i<nFiles; i++)
 	{
-		if (xhr[i].status==200)
 		{
 			//alert(xhr[i].count);
 			totalLength += xhr[i].count;
 		}
 	}
+}
+
+
+	var stringArray;
+
+function createArray()
+{
+
 	
-	//console.log(xhr[90].response);
+	addCounters();
+	countTotalRows();
 
-	var stringArray = [totalLength];
+	stringArray = [totalLength];
 
-	//alert("Länge = " +totalLength);
 
 	for (i=0; i<totalLength; i++)
 	{
@@ -82,10 +96,25 @@ function addValues()
 		    return a[timestamp] - b[timestamp];
 	});
 
+	printArray();
+}
 
+var myString;
+
+function printArray()
+{
+
+	myString = "";
+
+	var div = document.getElementById('output');
+	
 	for(i=0; i<stringArray.length; i++)
 	{
-		myString += stringArray[i] + "<br>";
+		myString += stringArray[i][timestamp] + ": ";
+		myString += stringArray[i][pac] + " - ";
+		myString += stringArray[i][pdc] + " - ";
+		myString += stringArray[i][udc] + " - ";
+		myString += stringArray[i][temp] + "<br>";
 	}
 
 	div.innerHTML = myString;
@@ -104,7 +133,10 @@ for (i=0; i<nFiles; i++)
 		count++;
 		if (count==nFiles) {
 			//alert(count + " Files Loaded from Server");
-			addValues();
+			createArray();
+			convertTimestampsToPixel();
+			printArray();
+			printGraph();
 		}
 		}; //hier darf man keine parameter übergeben wie (xhr[i], msg) sonst funktioniert das blöde XMLHttpRequest nicht richtig 
 
@@ -112,6 +144,33 @@ for (i=0; i<nFiles; i++)
 }
 
 
+function convertTimestampsToPixel()
+{
+	var timespan = 0;
+	timespan = stringArray[0][timestamp];
+	
+	for (i=0; i<stringArray.length; i++)
+	{
+		stringArray[i][timestamp]=(stringArray[i][timestamp]-timespan)/50;
+		//alert(stringArray[i][timestamp]);
+	}
+
+
+}
+
+
+function printGraph()
+{
+	
+}
+
+
+
+//
+//1519081200
+//1519167600
+       86400
+//differenz
 
 
 		</script>
