@@ -8,6 +8,12 @@
 var xhr=[];
 var count=0;
 
+var timestamp=0;
+var pac=6;
+var pdc=7;
+var udc=8;
+var temp=9;
+
 
 
 function printValues()
@@ -15,17 +21,32 @@ function printValues()
 	//alert (xhr[90].response)
 	var div = document.getElementById('output');
 	
-	var myString = xhr[90].response.split("\n")[0];
-	myString += xhr[90].response.split("\n").length + " <br> ";
+	var myString
 
-	var stringArray = []
+	length =  xhr[90].response.split("\n").length;
+	console.log(xhr[90].response);
+	alert (length);
+
+	var stringArray = [length];
+	
+	for (i=0; i<length; i++)
+	{
+		
+		stringArray[i]=[];
+		for (j=0; j<temp+1; j++)
+			stringArray[i][j]=0;
+	}
 
 	for (i=1; i<xhr.length; i++)
 	{
-		stringArray[i]= xhr[90].response.split("\n")[i] + " <br> " ;
+		stringArray[i][timestamp] = xhr[90].response.split("\n")[i].split(";")[timestamp] ;
+		stringArray[i][pac] = xhr[90].response.split("\n")[i].split(";")[pac] ;
+		stringArray[i][pdc] = xhr[90].response.split("\n")[i].split(";")[pdc] ;
+		stringArray[i][udc] = xhr[90].response.split("\n")[i].split(";")[udc] ;
+		stringArray[i][temp] = xhr[90].response.split("\n")[i].split(";")[temp] ;
 	}
 
-	stringArray.sort();
+	//stringArray.sort();
 
 	for(i=0; i<stringArray.length; i++)
 	{
