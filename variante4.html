@@ -26,26 +26,33 @@ function addValues()
 	for (i=0; i<nFiles; i++)
 	if (xhr[i].status==200)
 	{
-		xhr[i]["count"]=xhr[i].response.split("\n").length -1 - 1;  //schneidet CSV Header ab, das 2. -1 berücksichtigt dass das arrayfeld bei 0 beginnt
+		xhr[i]["count"]=xhr[i].response.split("\n").length -1 - 1;  //schneidet CSV Header ab, zweites -1 berücksichtigt dass arrayfeld bei 0 beginnt
 		//alert(xhr[i].count);
 	
-	
-	
-	
+	}
+	else
+	{
+		xhr[i]["count"]=0;
 	}
 
+	var totalLength = 0;
 
-	alert(xhr[7].count);
-
+	for (i=0; i<nFiles; i++)
+	{
+		if (xhr[i].status==200)
+		{
+			//alert(xhr[i].count);
+			totalLength += xhr[i].count;
+		}
+	}
 	
-	length = xhr[7].count; 
 	//console.log(xhr[90].response);
 
-	var stringArray = [length];
+	var stringArray = [totalLength];
 
-	//alert(length);
+	//alert("Länge = " +totalLength);
 
-	for (i=0; i<length; i++)
+	for (i=0; i<totalLength; i++)
 	{
 		
 		stringArray[i]=[];
@@ -53,18 +60,23 @@ function addValues()
 			stringArray[i][j]=0;
 	}
 
+	var arrayCounter = 0;
+
 	for (i=0; i<nFiles; i++)
 	{
-	alert(i);
-	if (xhr[i].status==200)
-	{
-		stringArray[i][timestamp] = xhr[i].response.split("\n")[i+1].split(";")[timestamp] ;
-		stringArray[i][pac] = xhr[i].response.split("\n")[i+1].split(";")[pac] ;
-		stringArray[i][pdc] = xhr[i].response.split("\n")[i+1].split(";")[pdc] ;
-		stringArray[i][udc] = xhr[i].response.split("\n")[i+1].split(";")[udc] ;
-		stringArray[i][temp] = xhr[i].response.split("\n")[i+1].split(";")[temp] ;
+		for (j=0; j<xhr[i].count; j++)
+		{
+			stringArray[arrayCounter][timestamp] = xhr[i].response.split("\n")[j+1].split(";")[timestamp] ;
+			stringArray[arrayCounter][pac] = xhr[i].response.split("\n")[j+1].split(";")[pac] ;
+			stringArray[arrayCounter][pdc] = xhr[i].response.split("\n")[j+1].split(";")[pdc] ;
+			stringArray[arrayCounter][udc] = xhr[i].response.split("\n")[j+1].split(";")[udc] ;
+			stringArray[arrayCounter][temp] = xhr[i].response.split("\n")[j+1].split(";")[temp] ;
+
+			arrayCounter+=1;
+		}
+		
 	}
-	}
+
 
 	stringArray.sort(function(a,b){
 		    return a[timestamp] - b[timestamp];
