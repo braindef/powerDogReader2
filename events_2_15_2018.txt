@@ -1,0 +1,5 @@
+id;timestamp;address;bus;errortype;errorcode;data;acknowleged
+148764;1518679569;2;3;10;6;;0
+148762;1518679219;2;3;10;4;;0
+148761;1518678823;2;3;10;1;;0
+148708;1518649989;0;0;10;519;Netcomm:UR Thu Feb 15 00:04:00 2018;0
