@@ -7,6 +7,7 @@
 
 //grafik parameter
 var height=500;
+var width=800;
 
 
 
@@ -154,7 +155,7 @@ function convertTimestampsToPixel()
 	
 	for (i=0; i<stringArray.length; i++)
 	{
-		stringArray[i][timestamp]=(stringArray[i][timestamp]-timespan)/50;
+		stringArray[i][timestamp]=(stringArray[i][timestamp]-timespan)/48;
 	//	alert(stringArray[i][timestamp]);
 	}
 
@@ -164,19 +165,36 @@ function convertTimestampsToPixel()
 
 function printGraph()
 {
+
+	var udcMax=0;
+	var pacMax=0;
+	var pdcMax=0;	
+
 	var c = document.getElementById("myCanvas");
 	var context = c.getContext("2d");
-	//context.rect(20, 20, 700.5, 300);
 	context.beginPath();
 	context.moveTo(stringArray[0][timestamp],height-stringArray[0][pac]);
-
+	
 	for (i=1; i<stringArray.length; i++)
 	{	
-		//alert("TEST");
-		//alert(stringArray[i][timestamp]+" -- " + stringArray[i][udc]);
-		//context.lineTo(stringArray[i][timestamp],stringArray[i][pac]);
 		context.lineWidth=3;
-		//context.lineTo(stringArray[i][timestamp],500-stringArray[i][pdc]);
+		context.lineTo(stringArray[i][timestamp],height-stringArray[i][pac]);
+		
+	}
+	//	context.lineTo(stringArray[i][timestamp], height);
+		context.lineTo(stringArray[stringArray.length-1][timestamp],height);
+		context.lineTo(0, height);
+	context.closePath();
+	context.stroke();
+	context.fillStyle = "rgba(255, 0, 0, 0.6)";
+	context.fill();
+
+
+	context.beginPath();
+	context.moveTo(stringArray[0][timestamp],height-stringArray[0][pac]);
+	for (i=1; i<stringArray.length; i++)
+	{	
+		context.lineWidth=3;
 		context.lineTo(stringArray[i][timestamp],height-stringArray[i][pdc]);
 		
 	}
@@ -185,8 +203,21 @@ function printGraph()
 		context.lineTo(0, height);
 	context.closePath();
 	context.stroke();
-	context.fillStyle = "#FFCC00";
+	context.fillStyle = "rgba(255, 255, 0, 0.6)";
 	context.fill();
+
+	for (i=1; i<stringArray.length; i++)
+	{	
+		context.lineWidth=3;
+		context.lineTo(stringArray[i][timestamp],height-stringArray[i][udc]);
+		
+	}
+	//	context.lineTo(stringArray[i][timestamp], height);
+		context.lineTo(stringArray[stringArray.length-1][timestamp],height);
+		context.lineTo(0, height);
+	context.stroke();
+
+
 
 }
 
