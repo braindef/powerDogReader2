@@ -163,12 +163,20 @@ function convertTimestampsToPixel()
 }
 
 
+function getMinMaxOf2DIndex (arr, idx) {
+    return {
+            min: Math.min.apply(null, arr.map(function (e) { return e[idx]})),
+            max: Math.max.apply(null, arr.map(function (e) { return e[idx]}))
+        }
+} 
+
+
 function printGraph()
 {
 
-	var udcMax=0;
-	var pacMax=0;
-	var pdcMax=0;	
+	var udcMax=getMinMaxOf2DIndex(stringArray, ucd)[0];
+	var pacMax=getMinMaxOf2DIndex(stringArray, ucd)[0];
+	var pdcMax=getMinMaxOf2DIndex(stringArray, ucd)[0];
 
 	var c = document.getElementById("myCanvas");
 	var context = c.getContext("2d");
