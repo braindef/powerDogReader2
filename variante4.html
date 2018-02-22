@@ -176,23 +176,29 @@ function printGraph()
 {
 
 	var udcMax=getMinMaxOf2DIndex(stringArray, udc).max;
-	var pacMax=getMinMaxOf2DIndex(stringArray, pac).max;
+	var pacMax=getMinMaxOf2DIndex(stringArray, pac).max;	//ich verwende dieses nicht, der PDC ist immer ähnlich wie der PAC, verwendet man nur einen Skalierungsfaktor braucht man nur eine Skala
 	var pdcMax=getMinMaxOf2DIndex(stringArray, pdc).max;
 
-	alert(udcMax + " " + pacMax +" "+pdcMax);
+	//alert(udcMax + " " + pacMax +" "+pdcMax);
 
 	var c = document.getElementById("myCanvas");
 	var context = c.getContext("2d");
+
+
+	// -------------- PAC ------------------
+	
+	context.setLineDash([]);
+	context.strokeStyle = '#000000';
+
 	context.beginPath();
 	context.moveTo(stringArray[0][timestamp],height-stringArray[0][pac]);
 	
 	for (i=1; i<stringArray.length; i++)
 	{	
 		context.lineWidth=3;
-		context.lineTo(stringArray[i][timestamp],height-(stringArray[i][pac]/pacMax*0.9*height));
+		context.lineTo(stringArray[i][timestamp],height-(stringArray[i][pac]/pdcMax*0.9*height));
 		
 	}
-	//	context.lineTo(stringArray[i][timestamp], height);
 		context.lineTo(stringArray[stringArray.length-1][timestamp],height);
 		context.lineTo(0, height);
 	context.closePath();
@@ -200,32 +206,42 @@ function printGraph()
 	context.fillStyle = "rgba(255, 0, 0, 0.6)";
 	context.fill();
 
+	// -------------- PAC ------------------
+	
+	context.setLineDash([10,0]);
+	context.strokeStyle = '#000000';
 
 	context.beginPath();
-	context.moveTo(stringArray[0][timestamp],height-stringArray[0][pac]);
+	context.moveTo(stringArray[0][timestamp],height-stringArray[0][pdc]);
 	for (i=1; i<stringArray.length; i++)
 	{	
 		context.lineWidth=3;
 		context.lineTo(stringArray[i][timestamp],height-(stringArray[i][pdc]/pdcMax*0.9*height));
 		
 	}
-	//	context.lineTo(stringArray[i][timestamp], height);
 		context.lineTo(stringArray[stringArray.length-1][timestamp],height);
 		context.lineTo(0, height);
 	context.closePath();
-	context.stroke();
+	//context.stroke();
 	context.fillStyle = "rgba(255, 255, 0, 0.6)";
 	context.fill();
+	context.stroke();
 
+	// -------------- UDC ------------------
+	
+	context.beginPath();
+	context.moveTo(stringArray[0][timestamp],height-stringArray[0][udc]);
 	for (i=1; i<stringArray.length; i++)
 	{	
 		context.lineWidth=3;
 		context.lineTo(stringArray[i][timestamp],height-(stringArray[i][udc]/udcMax*0.9*height));
 		
 	}
-	//	context.lineTo(stringArray[i][timestamp], height);
-		context.lineTo(stringArray[stringArray.length-1][timestamp],height);
-		context.lineTo(0, height);
+	context.lineTo(stringArray[stringArray.length-1][timestamp],height);
+	context.lineTo(0, height);
+	context.closePath();
+	context.strokeStyle = '#777777';
+	context.setLineDash([5, 5]);
 	context.stroke();
 
 
