@@ -31,6 +31,7 @@ var totalLength = 0;
 
 function addCounters()
 {
+	var pdcMax=0;	
 	
 	for (i=0; i<nFiles; i++)
 	if (xhr[i].status==200)
@@ -174,9 +175,11 @@ function getMinMaxOf2DIndex (arr, idx) {
 function printGraph()
 {
 
-	var udcMax=getMinMaxOf2DIndex(stringArray, ucd)[0];
-	var pacMax=getMinMaxOf2DIndex(stringArray, ucd)[0];
-	var pdcMax=getMinMaxOf2DIndex(stringArray, ucd)[0];
+	var udcMax=getMinMaxOf2DIndex(stringArray, udc).max;
+	var pacMax=getMinMaxOf2DIndex(stringArray, pac).max;
+	var pdcMax=getMinMaxOf2DIndex(stringArray, pdc).max;
+
+	alert(udcMax + " " + pacMax +" "+pdcMax);
 
 	var c = document.getElementById("myCanvas");
 	var context = c.getContext("2d");
@@ -186,7 +189,7 @@ function printGraph()
 	for (i=1; i<stringArray.length; i++)
 	{	
 		context.lineWidth=3;
-		context.lineTo(stringArray[i][timestamp],height-stringArray[i][pac]);
+		context.lineTo(stringArray[i][timestamp],height-(stringArray[i][pac]/pacMax*0.9*height));
 		
 	}
 	//	context.lineTo(stringArray[i][timestamp], height);
@@ -203,7 +206,7 @@ function printGraph()
 	for (i=1; i<stringArray.length; i++)
 	{	
 		context.lineWidth=3;
-		context.lineTo(stringArray[i][timestamp],height-stringArray[i][pdc]);
+		context.lineTo(stringArray[i][timestamp],height-(stringArray[i][pdc]/pdcMax*0.9*height));
 		
 	}
 	//	context.lineTo(stringArray[i][timestamp], height);
@@ -217,7 +220,7 @@ function printGraph()
 	for (i=1; i<stringArray.length; i++)
 	{	
 		context.lineWidth=3;
-		context.lineTo(stringArray[i][timestamp],height-stringArray[i][udc]);
+		context.lineTo(stringArray[i][timestamp],height-(stringArray[i][udc]/udcMax*0.9*height));
 		
 	}
 	//	context.lineTo(stringArray[i][timestamp], height);
