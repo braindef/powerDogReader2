@@ -178,6 +178,7 @@ function printGraph()
 	var udcMax=getMinMaxOf2DIndex(stringArray, udc).max;
 	var pacMax=getMinMaxOf2DIndex(stringArray, pac).max;	//ich verwende dieses nicht, der PDC ist immer ähnlich wie der PAC, verwendet man nur einen Skalierungsfaktor braucht man nur eine Skala
 	var pdcMax=getMinMaxOf2DIndex(stringArray, pdc).max;
+	var tempMax=getMinMaxOf2DIndex(stringArray, temp).max*2;
 
 	//alert(udcMax + " " + pacMax +" "+pdcMax);
 
@@ -241,6 +242,23 @@ function printGraph()
 	context.lineTo(0, height);
 	context.closePath();
 	context.strokeStyle = '#777777';
+	context.setLineDash([5, 5]);
+	context.stroke();
+
+	// -------------- Temperatur ------------------
+	
+	context.beginPath();
+	context.moveTo(stringArray[0][timestamp],height-stringArray[0][temp]);
+	for (i=1; i<stringArray.length; i++)
+	{	
+		context.lineWidth=3;
+		context.lineTo(stringArray[i][timestamp],height-(stringArray[i][temp]/tempMax*0.9*height));
+		
+	}
+	context.lineTo(stringArray[stringArray.length-1][timestamp],height);
+	context.lineTo(0, height);
+	context.closePath();
+	context.strokeStyle = '#FF0000';
 	context.setLineDash([5, 5]);
 	context.stroke();
 
