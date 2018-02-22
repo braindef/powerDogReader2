@@ -12,7 +12,7 @@ var width=800;
 
 
 //global variabeln
-var nFiles=5;
+var nFiles=3;
 var xhr=[];
 var count=0;
 
@@ -154,9 +154,12 @@ function convertTimestampsToPixel()
 	var timespan = 0;
 	timespan = stringArray[0][timestamp];
 	
+	yScaleFactor = (stringArray[stringArray.length-1][timestamp] - stringArray[0][timestamp]) / width;
+	alert(yScaleFactor);
+
 	for (i=0; i<stringArray.length; i++)
 	{
-		stringArray[i][timestamp]=(stringArray[i][timestamp]-timespan)/48;
+		stringArray[i][timestamp]=(stringArray[i][timestamp]-timespan)/yScaleFactor;
 	//	alert(stringArray[i][timestamp]);
 	}
 
