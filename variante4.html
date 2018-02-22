@@ -26,7 +26,8 @@ var temp=8;
 
 var totalLength = 0;
 
-
+var startTime = 0;
+var endTime = 0;
 
 
 function addCounters()
@@ -155,7 +156,7 @@ function convertTimestampsToPixel()
 	timespan = stringArray[0][timestamp];
 	
 	yScaleFactor = (stringArray[stringArray.length-1][timestamp] - stringArray[0][timestamp]) / width;
-	alert(yScaleFactor);
+	//alert(yScaleFactor);
 
 	for (i=0; i<stringArray.length; i++)
 	{
@@ -165,6 +166,26 @@ function convertTimestampsToPixel()
 
 
 }
+
+function biggerThan(array, index, value) {
+	for (i=0; i<array.length; i++)
+		if (array[i][index] < value)
+		{	
+			alert("i:"+i)
+			return i;
+		}
+}
+
+function smallerThan(array, index, value) {
+	for (i=0; i<array.length; i++)
+		if (array[i][index] > value)
+		{	
+			alert("i:"+i)
+			return i;
+		}
+}
+
+
 
 
 function getMinMaxOf2DIndex (arr, idx) {
@@ -177,42 +198,25 @@ function getMinMaxOf2DIndex (arr, idx) {
 /*
 
 //Function to get the mouse position
-function getMousePos(canvas, event) {
-    var rect = canvas.getBoundingClientRect();
-    return {
-        x: event.clientX - rect.left,
-        y: event.clientY - rect.top
-    };
-}
-//Function to check whether a point is inside a rectangle
-function isInside(pos, rect){
-    return pos.x > rect.x && pos.x < rect.x+rect.width && pos.y < rect.y+rect.height && pos.y > rect.y
-}
-
-var canvas = document.getElementById('myCanvas');
-var context = canvas.getContext('2d');
-//The rectangle should have x,y,width,height properties
-var rect = {
-    x:250,
-    y:350,
-    width:200,
-    height:100
-};
-//Binding the click event on the canvas
-canvas.addEventListener('click', function(evt) {
-    var mousePos = getMousePos(canvas, evt);
-
-    if (isInside(mousePos,rect)) {
-        alert('clicked inside rect');
-    }else{
-        alert('clicked outside rect');
-    }   
-}, false);
  
 */
 
-function printGraph()
+
+
+function printGraph(startTime, endTime)
 {
+
+	startTime = document.getElementById("startTime").value;
+	endTime = document.getElementById("endTime").value;
+
+	alert("Start: "+startTime + ". End: " +endTime);
+	alert(stringArray[10][0]);
+
+	arrayStart = biggerThan(stringArray, timestamp, startTime);
+	arrayEnd = smallerThan(stringArray, timestamp, endTime);
+
+
+	alert(startTime + " - " + endTime + "//"+arrayStart + " " + arrayEnd);
 
 	var udcMax=getMinMaxOf2DIndex(stringArray, udc).max;
 	var pacMax=getMinMaxOf2DIndex(stringArray, pac).max;	//ich verwende dieses nicht, der PDC ist immer ähnlich wie der PAC, verwendet man nur einen Skalierungsfaktor braucht man nur eine Skala
@@ -221,8 +225,10 @@ function printGraph()
 
 	//alert(udcMax + " " + pacMax +" "+pdcMax);
 
-	var c = document.getElementById("myCanvas");
-	var context = c.getContext("2d");
+	var canvas = document.getElementById("myCanvas");
+	var context = canvas.getContext("2d");
+
+	context.clearRect(0, 0, canvas.width, canvas.height);
 
 	context.lineCap="round";
 	context.lineJoin = 'round';
@@ -309,19 +315,16 @@ function printGraph()
 }
 
 
-//
-//1519081200
-//1519167600
-       86400
-//differenz
-
-
 		</script>
 
-	<div with="800">
+	<div width="800">
 <canvas id="myCanvas" width="800" height="500" style="border:1px solid #d3d3d3;">
-		Your browser does not support the HTML5 canvas tag.</canvas>
-	
+	Your browser does not support the HTML5 canvas tag.</canvas><br>
+<button onclick="myFunction()">&lt;</button>	
+<button onclick="myFunction()">&gt;</button>
+<input type="text" id="startTime" value="1519081200">
+<input type="text" id="endTime" value="1519167600">
+<button id="update" onclick="printGraph();">Update</button>
 	</div>
 
 
