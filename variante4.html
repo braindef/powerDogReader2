@@ -5,6 +5,9 @@
 		<body>
 		<script>
 
+//grafik parameter
+var height=500;
+
 
 
 //global variabeln
@@ -152,7 +155,7 @@ function convertTimestampsToPixel()
 	for (i=0; i<stringArray.length; i++)
 	{
 		stringArray[i][timestamp]=(stringArray[i][timestamp]-timespan)/50;
-		//alert(stringArray[i][timestamp]);
+	//	alert(stringArray[i][timestamp]);
 	}
 
 
@@ -161,7 +164,30 @@ function convertTimestampsToPixel()
 
 function printGraph()
 {
-	
+	var c = document.getElementById("myCanvas");
+	var context = c.getContext("2d");
+	//context.rect(20, 20, 700.5, 300);
+	context.beginPath();
+	context.moveTo(stringArray[0][timestamp],height-stringArray[0][pac]);
+
+	for (i=1; i<stringArray.length; i++)
+	{	
+		//alert("TEST");
+		//alert(stringArray[i][timestamp]+" -- " + stringArray[i][udc]);
+		//context.lineTo(stringArray[i][timestamp],stringArray[i][pac]);
+		context.lineWidth=3;
+		//context.lineTo(stringArray[i][timestamp],500-stringArray[i][pdc]);
+		context.lineTo(stringArray[i][timestamp],height-stringArray[i][pdc]);
+		
+	}
+	//	context.lineTo(stringArray[i][timestamp], height);
+		context.lineTo(stringArray[stringArray.length-1][timestamp],height);
+		context.lineTo(0, height);
+	context.closePath();
+	context.stroke();
+	context.fillStyle = "#FFCC00";
+	context.fill();
+
 }
 
 
@@ -174,6 +200,13 @@ function printGraph()
 
 
 		</script>
+
+
+	<canvas id="myCanvas" width="800" height="500" style="border:1px solid #d3d3d3;">
+		Your browser does not support the HTML5 canvas tag.</canvas>
+
+
+
 
 		<div id="output">TEST
 		</div>
