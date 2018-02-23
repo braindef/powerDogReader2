@@ -98,7 +98,8 @@ function printArray()
 		myString += stringArray[i][udc] + " - ";
 		myString += stringArray[i][temp] + "<br>";
 	}
-	div.innerHTML = myString;
+	//div.innerHTML = myString;
+	console.log(myString);
 }
 
 

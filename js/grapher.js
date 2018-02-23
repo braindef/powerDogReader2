@@ -50,6 +50,8 @@ function startup() {
 	
 	arrayStart = find(stringArray, timestamp, startTime);
 	arrayEnd = find(stringArray, timestamp, endTime);
+
+	printGraph();
 }
 
 
