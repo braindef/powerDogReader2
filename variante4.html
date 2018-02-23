@@ -29,6 +29,8 @@ var totalLength = 0;
 var startTime = 0;
 var endTime = 0;
 
+var arrayStart=0;
+var arrayEnd=100;
 
 function addCounters()
 {
@@ -142,6 +144,7 @@ for (i=0; i<nFiles; i++)
 			createArray();
 			//convertTimestampsToPixel();
 			printArray();
+			startup();
 			printGraph();
 		}
 		}; //hier darf man keine parameter übergeben wie (xhr[i], msg) sonst funktioniert das blöde XMLHttpRequest nicht richtig 
@@ -200,16 +203,29 @@ function timeToPixel(startTime, endTime, time, width)
 }
 
 
-function printGraph(startTime, endTime)
-{
+function moveLeft() {
+	arrayStart-=10;
+	arrayEnd-=10;
+	printGraph();
+}
 
+function moveLeft() {
+	arrayStart+=10;
+	arrayEnd+=10;
+	printGraph();
+}
+
+function startup() {
 	startTime = document.getElementById("startTime").value;
 	endTime = document.getElementById("endTime").value;
-
+	
 	arrayStart = find(stringArray, timestamp, startTime);
 	arrayEnd = find(stringArray, timestamp, endTime);
+}
 
-	alert(startTime + " - " + endTime + "//"+arrayStart + " " + arrayEnd);
+
+function printGraph(startTime, endTime)
+{
 
 	var udcMax=getMinMaxOf2DIndex(stringArray, udc).max;
 	var pacMax=getMinMaxOf2DIndex(stringArray, pac).max;	//ich verwende dieses nicht, der PDC ist immer ähnlich wie der PAC, verwendet man nur einen Skalierungsfaktor braucht man nur eine Skala
@@ -258,9 +274,9 @@ function printGraph(startTime, endTime)
 	<div width="800">
 		<canvas id="myCanvas" width="800" height="500" style="border:1px solid #d3d3d3;">
 		Your browser does not support the HTML5 canvas tag.</canvas><br>
-		<button onclick="myFunction()">&lt;</button>	
-		<button onclick="myFunction()">&gt;</button>
-		<input type="text" id="startTime" value="1518765004">
+		<button onclick="moveLeft()">&lt;</button>	
+		<button onclick="moveRight()">&gt;</button>
+		<input type="text" id="startTime" value="1518865004">
 		<input type="text" id="endTime" value="1518884700">
 		<button id="update" onclick="printGraph();">Update</button>
 	</div>
