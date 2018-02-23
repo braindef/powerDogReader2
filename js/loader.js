@@ -102,7 +102,7 @@ function printArray()
 		myString += stringArray[i][pac] + " - ";
 		myString += stringArray[i][pdc] + " - ";
 		myString += stringArray[i][udc] + " - ";
-		myString += stringArray[i][temp] + "<br>";
+		myString += stringArray[i][temp];
 	}
 	//div.innerHTML = myString;
 	console.log(myString);
@@ -126,7 +126,6 @@ function loadFiles()
 				createArray();
 				printArray();
 				startup();
-				printGraph();
 			}
 		}; //hier darf man keine parameter übergeben wie (xhr[i], msg) sonst funktioniert das blöde XMLHttpRequest nicht richtig 
 	xhr[i].send(null);
