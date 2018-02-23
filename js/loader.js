@@ -10,6 +10,12 @@ var pdc=6;
 var udc=7;
 var temp=8;
 
+var min = 60;
+var hour = 60 * min;
+var day = 24 * hour;
+var week = 7 * day;
+var month = 30 * day;
+var year = 365 * day;
 
 var totalLength = 0;
 
@@ -100,12 +106,13 @@ function printArray()
 	}
 	//div.innerHTML = myString;
 	console.log(myString);
+	//console.log(Date.getUnixTime());
+	console.log(new Date().getTime());
 }
 
 
 function loadFiles()
 {
-	alert("loadFiles");
 	for (i=0; i<nFiles; i++)
 	{
 	
