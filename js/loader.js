@@ -1,5 +1,5 @@
 //global variabeln
-var nFiles=6;
+var nFiles=7;
 var xhr=[];
 var count=0;
 
@@ -110,10 +110,10 @@ function printArray()
 		myString += stringArray[i][pac] + " - ";
 		myString += stringArray[i][pdc] + " - ";
 		myString += stringArray[i][udc] + " - ";
-		myString += stringArray[i][temp];
+		myString += stringArray[i][temp] + "<br>";
 	}
-	//div.innerHTML = myString;
-	console.log(myString);
+	div.innerHTML = myString;
+	//console.log(myString);
 	//console.log(Date.getUnixTime());
 	console.log(new Date().getTime());
 }

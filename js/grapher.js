@@ -37,28 +37,32 @@ function timeToPixel(startTime, endTime, time, width)
 
 
 function moveLeft() {
-	startTime-=600;	
-	endTime-=600;	
+	startTime-=6000;	
+	endTime-=6000;	
 	arrayStart = find(stringArray, timestamp, startTime);
 	arrayEnd = find(stringArray, timestamp, endTime);
 	//alert(startTime + " " + endTime + " -- " + arrayStart + " " + arrayEnd);
+	document.getElementById("startTime").value=startTime;
+	document.getElementById("endTime").value=endTime;
 	printGraph();
 }
 
 
 function moveRight() {
-	startTime+=600;	
-	endTime+=600;	
+	startTime+=6000;	
+	endTime+=6000;	
 	arrayStart = find(stringArray, timestamp, startTime);
 	arrayEnd = find(stringArray, timestamp, endTime);
 	//alert(startTime + " " + endTime + " -- " + arrayStart + " " + arrayEnd);
+	document.getElementById("startTime").value=startTime;
+	document.getElementById("endTime").value=endTime;
 	printGraph();
 }
 
 
 function startup() {
-	startTime = document.getElementById("startTime").value;
-	endTime = document.getElementById("endTime").value;
+	startTime = Number(document.getElementById("startTime").value);
+	endTime = Number(document.getElementById("endTime").value);
 	
 	arrayStart = find(stringArray, timestamp, startTime);
 	arrayEnd = find(stringArray, timestamp, endTime);
@@ -100,10 +104,10 @@ function printSubGraph(value, color, solid, fill)
 
 	context.beginPath();
 	context.moveTo(  timeToPixel ( startTime, endTime, startTime, width ),
-	 		 height-stringArray[arrayStart][value]);
+	 		 height - stringArray[arrayStart][value] / yMax*0.9*height );
 
 	for (i=arrayStart; i<arrayEnd; i++)
-	{	
+	{
 		context.lineTo( timeToPixel ( startTime, endTime, stringArray[i][timestamp], width ),
 				height-(stringArray[i][value]/yMax*0.9*height));
 	}
