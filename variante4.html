@@ -1,18 +1,17 @@
-
+<!DOCTYPE html>
 <html>
-		<head>
-		</head>
-		<body>
-		<script>
+	<head>
+	</head>
+	<body>
+	<script>
 
 //grafik parameter
 var height=500;
 var width=800;
 
 
-
 //global variabeln
-var nFiles=3;
+var nFiles=6;
 var xhr=[];
 var count=0;
 
@@ -31,6 +30,10 @@ var endTime = 0;
 
 var arrayStart=0;
 var arrayEnd=100;
+
+
+//entrypoint:
+loadFiles();
 
 function addCounters()
 {
@@ -55,28 +58,23 @@ function countTotalRows()
 	for (i=0; i<nFiles; i++)
 	{
 		{
-			//alert(xhr[i].count);
 			totalLength += xhr[i].count;
 		}
 	}
 }
 
 
-	var stringArray;
+var stringArray;
 
 function createArray()
 {
-
-	
 	addCounters();
 	countTotalRows();
 
 	stringArray = [totalLength];
 
-
 	for (i=0; i<totalLength; i++)
 	{
-		
 		stringArray[i]=[];
 		for (j=0; j<temp+1; j++)
 			stringArray[i][j]=0;
@@ -99,19 +97,16 @@ function createArray()
 		
 	}
 
-
 	stringArray.sort(function(a,b){
 		    return a[timestamp] - b[timestamp];
 	});
 
-	printArray();
 }
 
 var myString;
 
 function printArray()
 {
-
 	myString = "";
 
 	var div = document.getElementById('output');
@@ -129,58 +124,37 @@ function printArray()
 }
 
 
-
-for (i=0; i<nFiles; i++)
+function loadFiles()
 {
-	
-	//Hinweis, allenfalls fetch und promise verwenden
-	xhr[i] = new XMLHttpRequest();
-	xhr[i].open('POST', i+'.txt', true);
-
-	xhr[i].onload = function () {
-		count++;
-		if (count==nFiles) {
-			//alert(count + " Files Loaded from Server");
-			createArray();
-			//convertTimestampsToPixel();
-			printArray();
-			startup();
-			printGraph();
-		}
-		}; //hier darf man keine parameter übergeben wie (xhr[i], msg) sonst funktioniert das blöde XMLHttpRequest nicht richtig 
-
-	xhr[i].send(null);
-}
-
-
-function convertTimestampsToPixel()
-{
-	var timespan = 0;
-	timespan = stringArray[0][timestamp];
-	
-	yScaleFactor = (stringArray[stringArray.length-1][timestamp] - stringArray[0][timestamp]) / width;
-	//alert(yScaleFactor);
-
-	for (i=0; i<stringArray.length; i++)
+	alert("loadFiles");
+	for (i=0; i<nFiles; i++)
 	{
-		stringArray[i][timestamp]=(stringArray[i][timestamp]-timespan)/yScaleFactor;
-	//	alert(stringArray[i][timestamp]);
+	
+		//Hinweis, allenfalls fetch und promise verwenden
+		xhr[i] = new XMLHttpRequest();
+		xhr[i].open('POST', i+'.txt', true);
+
+		xhr[i].onload = function () {
+			count++;
+			if (count==nFiles) {
+				createArray();
+				printArray();
+				startup();
+				printGraph();
+			}
+		}; //hier darf man keine parameter übergeben wie (xhr[i], msg) sonst funktioniert das blöde XMLHttpRequest nicht richtig 
+	xhr[i].send(null);
 	}
-
-
 }
+
 
 function find(array, index, value) {
 	for (i=0; i<array.length; i++)
 		if (array[i][index] > value)
 		{	
-		//	alert("bigger i:"+i)
 			return i;
 		}
 }
-
-
-
 
 function getMinMaxOf2DIndex (arr, idx) {
     return {
@@ -188,12 +162,6 @@ function getMinMaxOf2DIndex (arr, idx) {
             max: Math.max.apply(null, arr.map(function (e) { return e[idx]}))
         }
 } 
-
-/*
-
-//Function to get the mouse position
- 
-*/
 
 
 function timeToPixel(startTime, endTime, time, width)
@@ -249,18 +217,17 @@ function printGraph(startTime, endTime)
 	context.lineWidth=2;
 
 	context.beginPath();
-	context.moveTo(  timeToPixel ( stringArray[arrayStart][timestamp], stringArray[arrayEnd][timestamp], stringArray[arrayStart][timestamp], 800 )
+	context.moveTo(  timeToPixel ( stringArray[arrayStart][timestamp], stringArray[arrayEnd][timestamp], stringArray[arrayStart][timestamp], width )
 	 		,height-stringArray[arrayStart][pac]);
 
 	for (i=arrayStart; i<arrayEnd; i++)
 	{	
-		context.lineTo( timeToPixel ( stringArray[arrayStart][timestamp], stringArray[arrayEnd][timestamp], stringArray[i][timestamp], 800 ),
+		context.lineTo( timeToPixel ( stringArray[arrayStart][timestamp], stringArray[arrayEnd][timestamp], stringArray[i][timestamp], width ),
 				height-(stringArray[i][pac]/pdcMax*0.9*height));
-		
 	}
-		context.lineTo( timeToPixel ( stringArray[arrayStart][timestamp], stringArray[arrayEnd][timestamp], stringArray[arrayEnd][timestamp], 800 ), 
+		context.lineTo( timeToPixel ( stringArray[arrayStart][timestamp], stringArray[arrayEnd][timestamp], stringArray[arrayEnd][timestamp], width ), 
 				height-(stringArray[i][pac]/pdcMax*0.9*height));
-		context.lineTo( timeToPixel ( stringArray[arrayStart][timestamp], stringArray[arrayEnd][timestamp], stringArray[arrayEnd][timestamp], 800 ), 
+		context.lineTo( timeToPixel ( stringArray[arrayStart][timestamp], stringArray[arrayEnd][timestamp], stringArray[arrayEnd][timestamp], width ), 
 				height);
 		context.lineTo(0, height);
 	context.closePath();
@@ -272,7 +239,7 @@ function printGraph(startTime, endTime)
 }
 
 
-		</script>
+	</script>
 
 	<div width="800">
 		<canvas id="myCanvas" width="800" height="500" style="border:1px solid #d3d3d3;">
@@ -291,8 +258,4 @@ function printGraph(startTime, endTime)
 
 	</body>
 </html>
-
-
-
-
 
