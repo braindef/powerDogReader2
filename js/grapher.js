@@ -24,6 +24,11 @@ function getMinMaxOf2DIndex (arr, idx) {
         }
 } 
 
+function getArrayFromTimestamp(startTime, endTime)
+{
+
+}
+
 
 function timeToPixel(startTime, endTime, time, width)
 {
@@ -32,16 +37,24 @@ function timeToPixel(startTime, endTime, time, width)
 
 
 function moveLeft() {
-	arrayStart-=5;
-	arrayEnd-=5;
+	startTime-=600;	
+	endTime-=600;	
+	arrayStart = find(stringArray, timestamp, startTime);
+	arrayEnd = find(stringArray, timestamp, endTime);
+	//alert(startTime + " " + endTime + " -- " + arrayStart + " " + arrayEnd);
 	printGraph();
 }
 
+
 function moveRight() {
-	arrayStart+=5;
-	arrayEnd+=5;
+	startTime+=600;	
+	endTime+=600;	
+	arrayStart = find(stringArray, timestamp, startTime);
+	arrayEnd = find(stringArray, timestamp, endTime);
+	//alert(startTime + " " + endTime + " -- " + arrayStart + " " + arrayEnd);
 	printGraph();
 }
+
 
 function startup() {
 	startTime = document.getElementById("startTime").value;
@@ -86,19 +99,22 @@ function printSubGraph(value, color, solid, fill)
 	context.lineWidth=2;
 
 	context.beginPath();
-	context.moveTo(  timeToPixel ( stringArray[arrayStart][timestamp], stringArray[arrayEnd][timestamp], stringArray[arrayStart][timestamp], width )
-	 		,height-stringArray[arrayStart][value]);
+	context.moveTo(  timeToPixel ( startTime, endTime, startTime, width ),
+	 		 height-stringArray[arrayStart][value]);
 
 	for (i=arrayStart; i<arrayEnd; i++)
 	{	
-		context.lineTo( timeToPixel ( stringArray[arrayStart][timestamp], stringArray[arrayEnd][timestamp], stringArray[i][timestamp], width ),
+		context.lineTo( timeToPixel ( startTime, endTime, stringArray[i][timestamp], width ),
 				height-(stringArray[i][value]/yMax*0.9*height));
 	}
-		context.lineTo( timeToPixel ( stringArray[arrayStart][timestamp], stringArray[arrayEnd][timestamp], stringArray[arrayEnd][timestamp], width ), 
+		context.lineTo( timeToPixel ( startTime, endTime, stringArray[arrayEnd][timestamp], width ), 
 				height-(stringArray[i][value]/yMax*0.9*height));
-		context.lineTo( timeToPixel ( stringArray[arrayStart][timestamp], stringArray[arrayEnd][timestamp], stringArray[arrayEnd][timestamp], width ), 
+
+		context.lineTo( timeToPixel ( startTime, endTime, endTime, width ), 
 				height);
-		context.lineTo(0, height);
+	
+	context.lineTo(0, height);
+	
 	context.closePath();
 	context.stroke();
 

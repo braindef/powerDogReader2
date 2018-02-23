@@ -90,6 +90,14 @@ function createArray()
 
 var myString;
 
+function loadPeriod(startTime, endTime)
+{
+
+}
+
+
+
+
 function printArray()
 {
 	myString = "";
