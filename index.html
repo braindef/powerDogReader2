@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<link rel="stylesheet" href="css/style.css">
+	<script src="./js/loader.js"></script>
+	<script src="./js/grapher.js"></script>
+	</head>
+	<body>
+
+	<div width="800">
+		<canvas id="myCanvas" width="800" height="500" style="border:1px solid #d3d3d3;">
+		Your browser does not support the HTML5 canvas tag.</canvas><br>
+		<button onclick="moveLeft()">&lt;</button>	
+		<button onclick="moveRight()">&gt;</button>
+		<input type="text" id="startTime" value="1518865004">
+		<input type="text" id="endTime" value="1518884700">
+		<button id="update" onclick="printGraph();">Update</button>
+	</div>
+
+	<br>
+	<br>
+	<br>
+
+	<div id="output">TEST
+	</div>
+
+	</body>
+</html>
+
