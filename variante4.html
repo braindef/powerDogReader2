@@ -204,14 +204,14 @@ function timeToPixel(startTime, endTime, time, width)
 
 
 function moveLeft() {
-	arrayStart-=10;
-	arrayEnd-=10;
+	arrayStart-=5;
+	arrayEnd-=5;
 	printGraph();
 }
 
-function moveLeft() {
-	arrayStart+=10;
-	arrayEnd+=10;
+function moveRight() {
+	arrayStart+=5;
+	arrayEnd+=5;
 	printGraph();
 }
 
@@ -258,7 +258,10 @@ function printGraph(startTime, endTime)
 				height-(stringArray[i][pac]/pdcMax*0.9*height));
 		
 	}
-		context.lineTo( timeToPixel ( stringArray[arrayStart][timestamp], stringArray[arrayEnd][timestamp], stringArray[arrayEnd][timestamp], 800 ), height);
+		context.lineTo( timeToPixel ( stringArray[arrayStart][timestamp], stringArray[arrayEnd][timestamp], stringArray[arrayEnd][timestamp], 800 ), 
+				height-(stringArray[i][pac]/pdcMax*0.9*height));
+		context.lineTo( timeToPixel ( stringArray[arrayStart][timestamp], stringArray[arrayEnd][timestamp], stringArray[arrayEnd][timestamp], 800 ), 
+				height);
 		context.lineTo(0, height);
 	context.closePath();
 	context.stroke();
