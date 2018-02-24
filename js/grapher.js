@@ -42,7 +42,7 @@ function moveLeft() {
 	arrayStart = find(stringArray, timestamp, startTime);
 	arrayEnd = find(stringArray, timestamp, endTime);
 	if (arrayStart = 'undefined') arrayStart = 0;				//TODO, hier stimmt was noch nicht
-	//alert(arrayEnd+" / " +arrayStart);
+	alert(arrayEnd+" / " +arrayStart);
 	//alert(startTime + " " + endTime + " -- " + arrayStart + " " + arrayEnd);
 	document.getElementById("startTime").value=startTime;
 	document.getElementById("endTime").value=endTime;
@@ -56,7 +56,7 @@ function moveRight() {
 	arrayStart = find(stringArray, timestamp, startTime);
 	arrayEnd = find(stringArray, timestamp, endTime);
 	if (arrayEnd = 'undefined') arrayEnd = stringArray.length;
-	//alert(arrayEnd+" / " +arrayStart);
+	alert(arrayEnd+" / " +arrayStart);
 	//alert(startTime + " " + endTime + " -- " + arrayStart + " " + arrayEnd);
 	document.getElementById("startTime").value=startTime;
 	document.getElementById("endTime").value=endTime;
@@ -84,8 +84,8 @@ function printGraph() {
 	context = canvas.getContext("2d");
 	context.clearRect(0, 0, canvas.width, canvas.height);
 	
-	printSubGraph(pdc, "#FF0000", true, "rgba(255, 0, 255, 0.6)");
-	printSubGraph(pac, "#FFFF00", true), "rgba(255, 255, 0, 0.6)";
+	printSubGraph(pac, "#000000", true, "rgba(255, 0, 0, 0.6)");
+	printSubGraph(pdc, "#000000", true, "rgba(255, 255, 0, 0.6)");
 	printSubGraph(udc, "#0000FF", false, "" );
 	printSubGraph(temp, "#555555", false, "" );
 }
@@ -104,7 +104,7 @@ function printSubGraph(value, color, solid, fill)
 
 	context.setLineDash([]);
 	context.strokeStyle = color;
-	context.lineWidth=2;
+	context.lineWidth=1;
 
 	context.beginPath();
 	context.moveTo(  timeToPixel ( startTime, endTime, startTime, width ),
