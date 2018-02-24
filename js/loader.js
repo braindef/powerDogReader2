@@ -21,6 +21,8 @@ var totalLength = 0;
 
 var startTime = Math.floor( new Date()  );		//TODO: doppelt
 
+var alreadyLoaded = Math.floor( new Date()  );		//TODO: doppelt
+
 //MAIN:
 loadFiles();
 
@@ -91,20 +93,15 @@ function createArray()
 
 var myString;
 
-function loadPeriod(startTime, endTime)
-{
-
-}
-
-
-
 
 function printArray()
 {
 	myString = "";
 
 	var div = document.getElementById('output');
-	
+
+	alert("stringArray:"+stringArray.length);
+
 	for(i=0; i<stringArray.length; i++)
 	{
 		myString += stringArray[i][timestamp] + ": ";
@@ -136,46 +133,29 @@ function getFileByTimestamp(stringName, jsTimestamp)
 
 
 function loadFiles()
-{	
+{
+	countFiles = parseInt((Math.floor ( new Date()/1000 ) - startTime ) / day );
 	for (i=0; i<15; i++)
 	{
 		Day = Math.floor ( new Date()/1000 ) - i*24*hour ;	//TODO: Anderer Variabelname
-		xhr.push(loadFile( Day ));
+		if (Day<alreadyLoaded)
+		{
+			alreadyLoaded=Day;
+			xhr.push( loadFile( Day ) );
+		}
 	}
 }
 
-
-//deprecated
-function loadAllFile(filename)
-{
-	for (i=0; i<nFiles; i++)
-	{
-	
-		//Hinweis, allenfalls fetch und promise verwenden
-		xhr[i] = new XMLHttpRequest();
-		xhr[i].open('POST', i+'.txt', true);
-
-		xhr[i].onload = function () {
-			count++;
-			if (count==nFiles) {
-				createArray();
-				printArray();
-				startup();
-			}
-		}; //hier darf man keine parameter übergeben wie (xhr[i], msg) sonst funktioniert das blöde XMLHttpRequest nicht richtig 
-	xhr[i].send(null);
-	}
-}
 
 
 function loadFile(timestamp)
 {	
+
 	nFiles++;
 	//alert("loadFile: " + timestamp);
 		//Hinweis, allenfalls fetch und promise verwenden
 		xhttpr = new XMLHttpRequest();
-		filename = getFileByTimestamp("B2_A2_S2", timestamp*1000)
-		//alert("Fileanme: "+filename);
+		filename = getFileByTimestamp("B2_A2_S2", timestamp*1000);
 		xhttpr.open('POST', filename, true);
 
 		xhttpr.onload = function () {

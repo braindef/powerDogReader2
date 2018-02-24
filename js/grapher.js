@@ -41,8 +41,8 @@ function moveLeft() {
 	endTime-=6000;	
 	arrayStart = find(stringArray, timestamp, startTime);
 	arrayEnd = find(stringArray, timestamp, endTime);
-	if (arrayStart = 'undefined') arrayStart = 0;				//TODO, hier stimmt was noch nicht
-	alert(arrayEnd+" / " +arrayStart);
+	//if (arrayStart = 'undefined') arrayStart = 0;				//TODO, hier stimmt was noch nicht
+	//alert(arrayEnd+" / " +arrayStart);
 	//alert(startTime + " " + endTime + " -- " + arrayStart + " " + arrayEnd);
 	document.getElementById("startTime").value=startTime;
 	document.getElementById("endTime").value=endTime;
@@ -55,8 +55,8 @@ function moveRight() {
 	endTime+=6000;	
 	arrayStart = find(stringArray, timestamp, startTime);
 	arrayEnd = find(stringArray, timestamp, endTime);
-	if (arrayEnd = 'undefined') arrayEnd = stringArray.length;
-	alert(arrayEnd+" / " +arrayStart);
+	//if (arrayEnd = 'undefined') arrayEnd = stringArray.length;
+	//alert(arrayEnd+" / " +arrayStart);
 	//alert(startTime + " " + endTime + " -- " + arrayStart + " " + arrayEnd);
 	document.getElementById("startTime").value=startTime;
 	document.getElementById("endTime").value=endTime;
