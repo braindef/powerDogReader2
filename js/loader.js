@@ -1,5 +1,5 @@
 //global variabeln
-var nFiles=7;
+var nFiles=0;	//TODO
 var xhr=[];
 var count=0;
 
@@ -19,6 +19,7 @@ var year = 365 * day;
 
 var totalLength = 0;
 
+var startTime = Math.floor( new Date()  );		//TODO: doppelt
 
 //MAIN:
 loadFiles();
@@ -118,8 +119,34 @@ function printArray()
 	console.log(new Date().getTime());
 }
 
+//for (i=0; i<10; i++)
+//getFileByTimestamp("B2_A2_S2", Math.floor( new Date() ) );
+
+function getFileByTimestamp(stringName, jsTimestamp)
+{
+	var date = new Date(jsTimestamp);
+	month = date.getMonth()+1;
+	day = date.getDate();
+	year = date.getFullYear();
+	var filename = stringName + "_global_" + month + "_" + day + "_" + year + ".txt";
+	//alert(filename);
+	return filename;
+}
+
+
 
 function loadFiles()
+{	
+	for (i=0; i<15; i++)
+	{
+		Day = Math.floor ( new Date()/1000 ) - i*24*hour ;	//TODO: Anderer Variabelname
+		xhr.push(loadFile( Day ));
+	}
+}
+
+
+//deprecated
+function loadAllFile(filename)
 {
 	for (i=0; i<nFiles; i++)
 	{
@@ -140,3 +167,26 @@ function loadFiles()
 	}
 }
 
+
+function loadFile(timestamp)
+{	
+	nFiles++;
+	//alert("loadFile: " + timestamp);
+		//Hinweis, allenfalls fetch und promise verwenden
+		xhttpr = new XMLHttpRequest();
+		filename = getFileByTimestamp("B2_A2_S2", timestamp*1000)
+		//alert("Fileanme: "+filename);
+		xhttpr.open('POST', filename, true);
+
+		xhttpr.onload = function () {
+			count++;
+			if (count==nFiles) {
+				alert("TODO: "+ nFiles);	//if all files loaded continue
+				createArray();
+				printArray();
+				startup();
+			}
+		}; //hier darf man keine parameter übergeben wie (xhr[i], msg) sonst funktioniert das blöde XMLHttpRequest nicht richtig 
+	xhttpr.send(null);
+	return xhttpr;
+}
