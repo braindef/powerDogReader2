@@ -74,8 +74,10 @@ function addCounters()
 
 function countTotalRows()
 {
+	totalLength=0;
 	for (i=0; i<nFiles; i++)
 	{
+		console.log("X totalLength: "+xhr[i].count);
 		totalLength += xhr[i].count;
 	}
 }
@@ -102,6 +104,7 @@ function createArray()
 	{
 		for (j=0; j<xhr[i].count; j++)
 		{
+			console.log("NOT ZERO:"+xhr[i].response.split("\n")[j+1].split(";")[timestamp] +"nFiles: "+nFiles + "totalLength: "+totalLength) ;
 			stringArray[arrayCounter][timestamp] = xhr[i].response.split("\n")[j+1].split(";")[timestamp] ;
 			stringArray[arrayCounter][pac] = xhr[i].response.split("\n")[j+1].split(";")[pac] ;
 			stringArray[arrayCounter][pdc] = xhr[i].response.split("\n")[j+1].split(";")[pdc] ;
@@ -133,6 +136,7 @@ function printArray()
 
 	for(i=0; i<stringArray.length; i++)
 	{
+		console.log(" myString: "+ stringArray[i][timestamp]);
 		myString += stringArray[i][timestamp] + ": ";
 		myString += stringArray[i][pac] + " - ";
 		myString += stringArray[i][pdc] + " - ";
