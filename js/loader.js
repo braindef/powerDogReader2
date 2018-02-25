@@ -40,14 +40,10 @@ class Loader {
 
 	addCounters()
 	{
-		//var pdcMax=0;	
-		//alert("nFiles: "+nFiles);	
 		for (var i=0; i<this.nFiles; i++)
 		if (this.xhr[i].status==200)
 		{
 			this.xhr[i]["count"]=this.xhr[i].response.split("\n").length -1 - 1;  //schneidet CSV Header ab, zweites -1 berücksichtigt dass arrayfeld bei 0 beginnt
-			//alert(this.xhr[i].count);
-	
 		}
 		else
 		{
@@ -122,8 +118,6 @@ class Loader {
 
 		//var div = document.getElementById('output');
 
-		//alert("stringArray:"+stringArray.length);
-
 		for(var i=0; i<this.stringArray.length; i++)
 		{
 			console.log(" myString: "+ this.myString);
@@ -173,7 +167,6 @@ class Loader {
 
 	loadFile(unixTimestamp)
 	{	
-		//alert("loadFile");
 		//Hinweis, allenfalls fetch und promise verwenden
 		var xhttpr = new XMLHttpRequest();
 		var filename = this.getFilenameByTimestamp(this.stringID, unixTimestamp*1000);
@@ -188,12 +181,10 @@ class Loader {
 
 		var me = this;
 
-		alert (me.nFiles);
 		xhttpr.open('POST', filename, true);
 		xhttpr.filename = filename;
 		xhttpr.onload = function () {
 			me.count++;
-			//alert (me.count +"??"+ me.nFiles);
 			if (me.count==me.nFiles) {
 				me.createArray();
 				me.printArray();

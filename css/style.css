@@ -75,4 +75,16 @@ a:visited {
 {
  width: 60%;
  height: 82;
-}​
+}
+
+.graph
+{
+	width: 500;
+}
+
+.canvas
+{
+	width: 450;
+	height: 300;
+}
+

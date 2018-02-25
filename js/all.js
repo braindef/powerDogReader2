@@ -38,7 +38,6 @@ ready(function() {
 
 	for (var i=0; i<strings.length; i++)
 	{
-		alert("i: "+i+" strings[i]: "+strings[i]);
 		loader[i] = new Loader(strings[i], document.getElementById(strings[i]));
 		grapher[i] = new Grapher(loader[i]);
 	

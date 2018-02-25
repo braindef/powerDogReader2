@@ -21,7 +21,6 @@ class Grapher {
 
 
 	find(array, index, value) {
-		alert(array);
 		for (var i=0; i<array.length; i++)
 			if (array[i][index] > value)
 			{	
@@ -69,10 +68,8 @@ class Grapher {
 
 
 	startup() {
-		alert(this.loader.stringArray);
 		this.arrayStart = this.find(this.loader.stringArray, timestamp, this.loader.startTime);
 		this.arrayEnd = this.find(this.loader.stringArray, timestamp, this.loader.endTime);
-		//alert(arrayEnd);	
 		this.printGraph();
 	}
 
