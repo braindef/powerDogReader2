@@ -14,6 +14,7 @@ function find(array, index, value) {
 		{	
 			return i;
 		}
+	return array.length;
 }
 
 function getMinMaxOf2DIndex (arr, idx) {
@@ -31,33 +32,25 @@ function timeToPixel(startTime, endTime, time, width)
 
 
 function moveLeft() {
-	startTime-=day;	
-	endTime-=day;	
+	startTime-=hour;	
+	endTime-=hour;	
+	console.log("Endtime: " + endTime + " -- StartTime: " + startTime);
 	arrayStart = find(stringArray, timestamp, startTime);
 	arrayEnd = find(stringArray, timestamp, endTime);
-	//if (arrayStart = 'undefined') arrayStart = 0;				//TODO, hier stimmt was noch nicht
-	//alert(arrayEnd+" / " +arrayStart);
-	//alert(startTime + " " + endTime + " -- " + arrayStart + " " + arrayEnd);
-	//document.getElementById("startTime").value=startTime;
-	//document.getElementById("endTime").value=endTime;
-	//alert(endTime);
 	loadFiles();	
-	//createArray();	
 	printGraph();
-
 }
 
 
 function moveRight() {
-	startTime+=6000;	
-	endTime+=6000;	
+	startTime+=hour;	
+	endTime+=hour;
+	console.log("Endtime: " + endTime + " -- StartTime: " + startTime);
+	if (endTime>lastFileTime) endTime=lastFileTime;
+	if (endTime>lastFileTime) startTime=lastFileTime - day;
 	arrayStart = find(stringArray, timestamp, startTime);
 	arrayEnd = find(stringArray, timestamp, endTime);
-	//if (arrayEnd = 'undefined') arrayEnd = stringArray.length;
-	//alert(arrayEnd+" / " +arrayStart);
-	//alert(startTime + " " + endTime + " -- " + arrayStart + " " + arrayEnd);
-	document.getElementById("startTime").value=startTime;
-	document.getElementById("endTime").value=endTime;
+	loadFiles();
 	printGraph();
 }
 
@@ -66,7 +59,7 @@ function startup() {
 
 	arrayStart = find(stringArray, timestamp, startTime);
 	arrayEnd = find(stringArray, timestamp, endTime);
-	
+	//alert(arrayEnd);	
 	printGraph();
 }
 
@@ -111,11 +104,13 @@ function printSubGraph(value, color, solid, fill)
 		context.lineTo( timeToPixel ( startTime, endTime, stringArray[i][timestamp], width ),
 				height-(stringArray[i][value]/yMax*0.9*height));
 	}
-		context.lineTo( timeToPixel ( startTime, endTime, stringArray[arrayEnd][timestamp], width ), 
-				height-(stringArray[i][value]/yMax*0.9*height));
 
-		context.lineTo( timeToPixel ( startTime, endTime, endTime, width ), 
-				height);
+
+	context.lineTo( timeToPixel ( startTime, endTime, stringArray[arrayEnd-1][timestamp], width ),
+		height-(stringArray[arrayEnd-1][value]/yMax*0.9*height));
+	
+	context.lineTo( timeToPixel ( startTime, endTime, stringArray[arrayEnd-1][timestamp], width ),
+		height);
 	
 	context.lineTo(0, height);
 	

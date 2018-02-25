@@ -3,13 +3,14 @@ var nFiles=0;	//TODO
 var xhr=[];
 var count=0;
 
-//spaltenbenennung fürs array <-> csv
+//konstanten spaltenbenennung fürs array <-> csv
 var timestamp=0;
 var pac=5;
 var pdc=6;
 var udc=7;
 var temp=8;
 
+//konstanten für zeiten
 var min = 60;
 var hour = 60 * min;
 var day = 24 * hour;
@@ -48,8 +49,8 @@ ready(function() {
 	firstFileTime = Math.floor( new Date() /1000 ) - 3 * day;
 	lastFileTime = Math.floor( new Date() / 1000);
 
-	startTime = firstFileTime;
-	endTime = lastFileTime;
+	startTime = firstFileTime+1;
+	endTime = lastFileTime-1;
 	
 	loadFiles();
 });
@@ -121,7 +122,7 @@ function createArray()
 	});
 
 
-	lastFileTime = getMinMaxOf2DIndex(stringArray, timestamp).max-1;
+	lastFileTime = getMinMaxOf2DIndex(stringArray, timestamp).max;
 	firstFileTime = getMinMaxOf2DIndex(stringArray, timestamp).min;
 }
 
@@ -144,9 +145,6 @@ function printArray()
 		myString += stringArray[i][temp] + "<br>";
 	}
 	div.innerHTML = myString;
-	//console.log(myString);
-	//console.log(Date.getUnixTime());
-	console.log(new Date().getTime());
 }
 
 
