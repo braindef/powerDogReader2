@@ -179,13 +179,13 @@ function loadFiles()
 	}
 }
 
-
+var string = "B2_A2_S2";
 
 function loadFile(unixTimestamp)
 {	
 	//Hinweis, allenfalls fetch und promise verwenden
 	xhttpr = new XMLHttpRequest();
-	filename = getFilenameByTimestamp("B2_A2_S2", unixTimestamp*1000);
+	filename = getFilenameByTimestamp(string, unixTimestamp*1000);
 	
 	for(i=0; i<xhr.length; i++)
 		if (xhr[i].filename == filename)

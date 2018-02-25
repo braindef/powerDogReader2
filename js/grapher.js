@@ -73,8 +73,8 @@ function printGraph() {
 	context = canvas.getContext("2d");
 	context.clearRect(0, 0, canvas.width, canvas.height);
 	
-	printSubGraph(pac, "#000000", true, "rgba(255, 0, 0, 0.6)");
-	printSubGraph(pdc, "#000000", true, "rgba(255, 255, 0, 0.6)");
+	printSubGraph(pac, "#FF0000", true, "rgba(255, 0, 0, 0.6)");
+	printSubGraph(pdc, "#FFFF00", true, "rgba(255, 255, 0, 0.6)");
 	printSubGraph(udc, "#0000FF", false, "" );
 	printSubGraph(temp, "#555555", false, "" );
 }
