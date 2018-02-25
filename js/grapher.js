@@ -83,10 +83,7 @@ function printGraph() {
 
 function printSubGraph(value, color, solid, fill)
 {
-
-	var yMax=getMinMaxOf2DIndex(stringArray, value).max;
-
-
+	var yMax=getMinMaxOf2DIndex(stringArray.slice(arrayStart, arrayEnd), value).max;
 
 	context.lineCap = 'round';
 	context.lineJoin = 'round';
@@ -105,7 +102,8 @@ function printSubGraph(value, color, solid, fill)
 				height-(stringArray[i][value]/yMax*0.9*height));
 	}
 
-
+	if (solid==true)
+	{
 	context.lineTo( timeToPixel ( startTime, endTime, stringArray[arrayEnd-1][timestamp], width ),
 		height-(stringArray[arrayEnd-1][value]/yMax*0.9*height));
 	
@@ -113,14 +111,10 @@ function printSubGraph(value, color, solid, fill)
 		height);
 	
 	context.lineTo(0, height);
-	
-	context.closePath();
-	context.stroke();
-
-	if (solid==true)
-	{
+		context.closePath();
 		context.fillStyle = fill;
 		context.fill();
 	}
+	context.stroke();
 }
 
