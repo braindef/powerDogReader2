@@ -17,8 +17,9 @@ class Loader {
 
 		this.totalListLength = 0;
 
-		this.firstFileTime;
-		this.lastFileTime;
+
+		this.firstFileTime = Math.floor( new Date() /1000 ) - 3 * day;
+		this.lastFileTime = Math.floor( new Date() / 1000);
 
 		this.alreadyLoaded = Math.floor( new Date() / 1000  );
 
@@ -26,8 +27,8 @@ class Loader {
 
 		this.myString;
 
-		this.startTime;
-		this.endTime;
+		this.startTime = this.firstFileTime+1;
+		this.endTime = this.lastFileTime-1;
 
 		this.grapher;
 

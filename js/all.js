@@ -30,17 +30,18 @@ var ready = function ( fn ) {
 };
 // Example
 ready(function() {
+
+
+	var strings = [ "B2_A2_S1", "B2_A2_S2", "B2_A3_S1" ];
+	//var loader;
+	//var grapher;
+
+	//for (var i=0; i<strings.lenght; i++)
+	//{
+		var loader = new Loader("B2_A2_S2", document.getElementById("B2_A2_S2"));
+		var grapher = new Grapher(loader);
 	
-	const loader = new Loader("B2_A2_S2", document.getElementById("myCanvas"));
-	const grapher = new Grapher(loader);
-
-	//grapher.startup();
-
-	loader.firstFileTime = Math.floor( new Date() /1000 ) - 3 * day;
-	loader.lastFileTime = Math.floor( new Date() / 1000);
-
-	loader.startTime = loader.firstFileTime+1;
-	loader.endTime = loader.lastFileTime-1;
-	loader.loadFiles();
+		loader.loadFiles();
+	//}
 
 });
