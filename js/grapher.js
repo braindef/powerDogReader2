@@ -6,8 +6,8 @@ class Grapher {
 	this.loader.grapher=this;
 
 	//grafik parameter
-	this.height=500;
-	this.width=800;
+	this.height=loader.canvas.height;
+	this.width=loader.canvas.width;
 
 	this.arrayStart=0;
 	this.arrayEnd=0;

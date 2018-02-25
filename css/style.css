@@ -79,12 +79,13 @@ a:visited {
 
 .graph
 {
-	width: 500;
+	width: 550px;
+	height: 450px;
 }
 
 .canvas
 {
-	width: 450;
-	height: 300;
+	width: 540px;
+	height: 400px;
 }
 

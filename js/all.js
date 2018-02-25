@@ -32,12 +32,17 @@ var ready = function ( fn ) {
 ready(function() {
 
 
-	var strings = [ "B2_A2_S1", "B2_A2_S2", "B2_A3_S1" ];
+	var strings = [ "B2_A2_S1", "B2_A2_S2", "B2_A3_S1", "B2_A3_S2" ];
+
+	createGraphs(strings);
+
 	var loader = [];
 	var grapher = [];
 
 	for (var i=0; i<strings.length; i++)
 	{
+
+		
 		loader[i] = new Loader(strings[i], document.getElementById(strings[i]));
 		grapher[i] = new Grapher(loader[i]);
 	
@@ -45,3 +50,14 @@ ready(function() {
 	}
 
 });
+
+
+function createGraphs(strings)
+{
+	for (var i=0; i<strings.length; i++)
+	{
+		//alert(i);
+	}
+
+
+}
