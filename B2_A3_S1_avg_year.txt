@@ -1,3 +1,3 @@
 year;address;bus;strings;stringid;produced_year
 2017;3;2;2;1;3882944
-2018;3;2;2;1;199204
+2018;3;2;2;1;223592
