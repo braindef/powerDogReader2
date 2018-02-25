@@ -19,11 +19,17 @@ var year = 365 * day;
 
 var totalLength = 0;
 
-var startTime = Math.floor( new Date() /1000 ) - 4 * day;		//TODO: doppelt
-var endTime = Math.floor( new Date() / 1000) -1 * day;
+var startTime;
 
+var firstFileTime;
+var lastFileTime;
 
-var alreadyLoaded = Math.floor( new Date()  );
+var alreadyLoaded = Math.floor( new Date() / 1000  );
+
+var stringArray;
+
+var myString;
+
 
 //MAIN:
 //wait until the document is ready
@@ -34,17 +40,17 @@ var ready = function ( fn ) {
 	if ( document.readyState === 'complete'  ) {
 		return fn();
 	}
-
     	// Otherwise, wait until document is loaded
 	document.addEventListener( 'DOMContentLoaded', fn, false );
 };
-
 // Example
 ready(function() {
-	 // Do stuff...
-	alert("START");
-	document.getElementById("startTime").value = startTime;
-	document.getElementById("endTime").value = endTime;
+	firstFileTime = Math.floor( new Date() /1000 ) - 3 * day;
+	lastFileTime = Math.floor( new Date() / 1000);
+
+	startTime = firstFileTime;
+	endTime = lastFileTime;
+	
 	loadFiles();
 });
 
@@ -52,7 +58,7 @@ ready(function() {
 function addCounters()
 {
 	var pdcMax=0;	
-	
+	//alert("nFiles: "+nFiles);	
 	for (i=0; i<nFiles; i++)
 	if (xhr[i].status==200)
 	{
@@ -75,7 +81,6 @@ function countTotalRows()
 }
 
 
-var stringArray;
 
 function createArray()
 {
@@ -112,9 +117,10 @@ function createArray()
 		    return a[timestamp] - b[timestamp];
 	});
 
-}
 
-var myString;
+	lastFileTime = getMinMaxOf2DIndex(stringArray, timestamp).max-1;
+	firstFileTime = getMinMaxOf2DIndex(stringArray, timestamp).min;
+}
 
 
 function printArray()
@@ -123,7 +129,7 @@ function printArray()
 
 	var div = document.getElementById('output');
 
-	alert("stringArray:"+stringArray.length);
+	//alert("stringArray:"+stringArray.length);
 
 	for(i=0; i<stringArray.length; i++)
 	{
@@ -139,58 +145,67 @@ function printArray()
 	console.log(new Date().getTime());
 }
 
-//for (i=0; i<10; i++)
-//getFileByTimestamp("B2_A2_S2", Math.floor( new Date() ) );
 
-function getFileByTimestamp(stringName, jsTimestamp)
+function getFilenameByTimestamp(stringName, jsTimestamp)
 {
 	var date = new Date(jsTimestamp);
 	month = date.getMonth()+1;
-	day = date.getDate();
+	days = date.getDate();
 	year = date.getFullYear();
-	var filename = stringName + "_global_" + month + "_" + day + "_" + year + ".txt";
-	//alert(filename);
+	var filename = stringName + "_global_" + month + "_" + days + "_" + year + ".txt";
 	return filename;
 }
 
 
-
 function loadFiles()
 {
-	countFiles = parseInt(( endTime - startTime ) / day );
-	alert("endtime: "+endTime+" startTime: "+startTime+" countFile: "+countFiles);
+	//countFiles = 6;
+	countFiles = ( lastFileTime - startTime ) / day;
+	console.log("CountFiles: "+countFiles + " = " + lastFileTime + " - " + startTime + " day: " + day);
+
+	if (countFiles>10) return;
+
 	for (i=0; i<countFiles; i++)
 	{
-		Day = Math.floor ( new Date()/1000 ) - i*24*hour ;	//TODO: Anderer Variabelname
-		if (Day<alreadyLoaded)
 		{
-			alreadyLoaded=Day;
-			xhr.push( loadFile( Day ) );
+			Day = lastFileTime - i * day;
+			console.log("Day: "+Day+"=lastFileTime: "+lastFileTime);
+			file = loadFile( Day );
+			if (file != null)
+				xhr.push( file );
 		}
 	}
 }
 
 
 
-function loadFile(timestamp)
+function loadFile(unixTimestamp)
 {	
-
+	//Hinweis, allenfalls fetch und promise verwenden
+	xhttpr = new XMLHttpRequest();
+	filename = getFilenameByTimestamp("B2_A2_S2", unixTimestamp*1000);
+	
+	for(i=0; i<xhr.length; i++)
+		if (xhr[i].filename == filename)
+		{
+			console.log("xhr[i].file==file");
+			return null;
+		}
 	nFiles++;
-	//alert("loadFile: " + timestamp);
-		//Hinweis, allenfalls fetch und promise verwenden
-		xhttpr = new XMLHttpRequest();
-		filename = getFileByTimestamp("B2_A2_S2", timestamp*1000);
-		xhttpr.open('POST', filename, true);
 
-		xhttpr.onload = function () {
-			count++;
-			if (count==nFiles) {
-				alert("TODO: "+ nFiles);	//if all files loaded continue
-				createArray();
-				printArray();
-				startup();
-			}
-		}; //hier darf man keine parameter übergeben wie (xhr[i], msg) sonst funktioniert das blöde XMLHttpRequest nicht richtig 
+	xhttpr.open('POST', filename, true);
+	xhttpr.filename = filename;
+	xhttpr.onload = function () {
+		count++;
+		if (count==nFiles) {
+			createArray();
+			//anzeige auf letzten Timestamp stellen
+			//endTime = getMinMaxOf2DIndex(stringArray, timestamp).max-1;
+			//startTime = getMinMaxOf2DIndex(stringArray, timestamp).min;
+			printArray();
+			startup();
+		}
+	}; //hier darf man keine parameter übergeben wie (xhr[i], msg) sonst funktioniert das blöde XMLHttpRequest nicht richtig 
 	xhttpr.send(null);
 	return xhttpr;
 }

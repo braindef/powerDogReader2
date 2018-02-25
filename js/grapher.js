@@ -5,7 +5,7 @@ var width=800;
 //var startTime = 0;
 
 var arrayStart=0;
-var arrayEnd=100;
+var arrayEnd=0;
 
 
 function find(array, index, value) {
@@ -23,11 +23,6 @@ function getMinMaxOf2DIndex (arr, idx) {
         }
 } 
 
-function getArrayFromTimestamp(startTime, endTime)
-{
-
-}
-
 
 function timeToPixel(startTime, endTime, time, width)
 {
@@ -36,16 +31,20 @@ function timeToPixel(startTime, endTime, time, width)
 
 
 function moveLeft() {
-	startTime-=6000;	
-	endTime-=6000;	
+	startTime-=day;	
+	endTime-=day;	
 	arrayStart = find(stringArray, timestamp, startTime);
 	arrayEnd = find(stringArray, timestamp, endTime);
 	//if (arrayStart = 'undefined') arrayStart = 0;				//TODO, hier stimmt was noch nicht
 	//alert(arrayEnd+" / " +arrayStart);
 	//alert(startTime + " " + endTime + " -- " + arrayStart + " " + arrayEnd);
-	document.getElementById("startTime").value=startTime;
-	document.getElementById("endTime").value=endTime;
+	//document.getElementById("startTime").value=startTime;
+	//document.getElementById("endTime").value=endTime;
+	//alert(endTime);
+	loadFiles();	
+	//createArray();	
 	printGraph();
+
 }
 
 
@@ -64,12 +63,10 @@ function moveRight() {
 
 
 function startup() {
-	startTime = Number(document.getElementById("startTime").value);
-	endTime = Number(document.getElementById("endTime").value);
-	
+
 	arrayStart = find(stringArray, timestamp, startTime);
 	arrayEnd = find(stringArray, timestamp, endTime);
-
+	
 	printGraph();
 }
 
