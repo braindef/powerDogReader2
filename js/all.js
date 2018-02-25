@@ -33,15 +33,16 @@ ready(function() {
 
 
 	var strings = [ "B2_A2_S1", "B2_A2_S2", "B2_A3_S1" ];
-	//var loader;
-	//var grapher;
+	var loader = [];
+	var grapher = [];
 
-	//for (var i=0; i<strings.lenght; i++)
-	//{
-		var loader = new Loader("B2_A2_S2", document.getElementById("B2_A2_S2"));
-		var grapher = new Grapher(loader);
+	for (var i=0; i<strings.length; i++)
+	{
+		alert("i: "+i+" strings[i]: "+strings[i]);
+		loader[i] = new Loader(strings[i], document.getElementById(strings[i]));
+		grapher[i] = new Grapher(loader[i]);
 	
-		loader.loadFiles();
-	//}
+		loader[i].loadFiles();
+	}
 
 });
