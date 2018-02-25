@@ -19,12 +19,35 @@ var year = 365 * day;
 
 var totalLength = 0;
 
-var startTime = Math.floor( new Date()  );		//TODO: doppelt
+var startTime = Math.floor( new Date() /1000 ) - 4 * day;		//TODO: doppelt
+var endTime = Math.floor( new Date() / 1000) -1 * day;
 
-var alreadyLoaded = Math.floor( new Date()  );		//TODO: doppelt
+
+var alreadyLoaded = Math.floor( new Date()  );
 
 //MAIN:
-loadFiles();
+//wait until the document is ready
+var ready = function ( fn ) {
+	//Sanity Check
+	if ( typeof fn !== 'function' ) return;
+	// If document is already loaded, run method
+	if ( document.readyState === 'complete'  ) {
+		return fn();
+	}
+
+    	// Otherwise, wait until document is loaded
+	document.addEventListener( 'DOMContentLoaded', fn, false );
+};
+
+// Example
+ready(function() {
+	 // Do stuff...
+	alert("START");
+	document.getElementById("startTime").value = startTime;
+	document.getElementById("endTime").value = endTime;
+	loadFiles();
+});
+
 
 function addCounters()
 {
@@ -134,8 +157,9 @@ function getFileByTimestamp(stringName, jsTimestamp)
 
 function loadFiles()
 {
-	countFiles = parseInt((Math.floor ( new Date()/1000 ) - startTime ) / day );
-	for (i=0; i<15; i++)
+	countFiles = parseInt(( endTime - startTime ) / day );
+	alert("endtime: "+endTime+" startTime: "+startTime+" countFile: "+countFiles);
+	for (i=0; i<countFiles; i++)
 	{
 		Day = Math.floor ( new Date()/1000 ) - i*24*hour ;	//TODO: Anderer Variabelname
 		if (Day<alreadyLoaded)

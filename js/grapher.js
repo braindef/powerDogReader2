@@ -2,8 +2,7 @@
 var height=500;
 var width=800;
 
-var startTime = 0;
-var endTime = 0;
+//var startTime = 0;
 
 var arrayStart=0;
 var arrayEnd=100;
