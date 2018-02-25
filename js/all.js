@@ -56,8 +56,29 @@ function createGraphs(strings)
 {
 	for (var i=0; i<strings.length; i++)
 	{
-		//alert(i);
+		addRow(strings[i]);
 	}
 
 
 }
+
+
+function addRow(string) {
+	    var div = document.createElement('div');
+
+	    div.className = 'graph';
+
+	    div.innerHTML =
+		        '<div class="graph, center">' +
+		        '<canvas id="'+string+'" class="canvas" style="border:2px solid #d3d3d3; background-color: #FFFFFF">' +
+		                'Your browser does not support the HTML5 canvas tag.</canvas><br>' +
+		        '</div>';
+
+	    document.getElementById('content').appendChild(div);
+}
+
+function removeRow(input) {
+	    document.getElementById('content').removeChild(input.parentNode);
+}
+
+
