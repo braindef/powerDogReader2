@@ -6,7 +6,7 @@ color: #ffffff;
 font-family: monospace; }
 
 div.center {
-  width: 600px;
+  width: 900px;
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -85,13 +85,13 @@ a:visited {
 
 .graph
 {
-	width: 550px;
-	height: 450px;
+	width: 850px;
+	height: 650px;
 }
 
 .canvas
 {
-	width: 540px;
-	height: 400px;
+	width: 840px;
+	height: 600px;
 }
 

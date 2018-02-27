@@ -32,7 +32,6 @@ class Loader {
 
 		this.grapher;
 
-
 	}
 
 

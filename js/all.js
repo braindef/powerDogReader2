@@ -70,7 +70,7 @@ function addRow(string) {
 
 	    div.innerHTML =
 		        '<div class="graph, center">' +
-		        '<canvas id="'+string+'" class="canvas" style="border:2px solid #d3d3d3; background-color: #FFFFFF">' +
+		        '<canvas id="'+string+'" class="canvas" width="800" height="600" style="border:2px solid #d3d3d3; background-color: #FFFFFF">' +
 		                'Your browser does not support the HTML5 canvas tag.</canvas><br>' +
 		        '</div>';
 
