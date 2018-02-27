@@ -18,7 +18,7 @@ class Grapher {
 	this.canvas=this.loader.canvas;
 	this.context;
 
-
+	this.site;
 	}
 
 
@@ -42,7 +42,7 @@ class Grapher {
 
 	timeToPixel(startTime, endTime, time, width)
 	{
-		return (time - this.loader.startTime)/(this.loader.endTime-this.loader.startTime)*width;
+		return (time - startTime)/(endTime-startTime)*width;
 	}
 
 
@@ -120,25 +120,22 @@ class Grapher {
 		this.context.lineWidth=1;
 
 		this.context.beginPath();
-		//this.context.moveTo( offsetX + this.timeToPixel ( this.loader.startTime, this.loader.endTime, this.loader.startTime, width ),
-		// 		 this.height - offsetY - this.loader.stringArray[this.arrayStart][value] / this.yMax * height );
-	
+		this.context.moveTo( offsetX + this.timeToPixel ( this.loader.startTime, this.loader.endTime, this.loader.startTime, width ),
+		 		 this.height - offsetY - this.loader.stringArray[this.arrayStart][value] / this.yMax * height );
+
 
 		for (var i=this.arrayStart; i<this.arrayEnd; i++)
 		{
-			this.context.lineTo( offsetX + this.timeToPixel ( this.loader.startTime, this.loader.endTime, this.loader.stringArray[i][timestamp], width ),
+		this.context.lineTo( offsetX + this.timeToPixel ( this.loader.startTime, this.loader.endTime, this.loader.stringArray[i][timestamp], width ),
 					this.height - offsetY - this.loader.stringArray[i][value] / this.yMax * height);
 		}
+		
 
 		if (solid==true)
 		{
-		this.context.lineTo( this.timeToPixel ( this.loader.startTime, this.loader.endTime, this.loader.stringArray[this.arrayEnd-1][timestamp], width ),
-			this.height - offsetY - this.loader.stringArray[this.arrayEnd-1][value] / this.yMax * height);
-	
-		this.context.lineTo( this.timeToPixel ( this.loader.startTime, this.loader.endTime, this.loader.stringArray[this.arrayEnd-1][timestamp], width ),
-			this.height - offsetY );
-	
-		this.context.lineTo(offsetX, this.height - offsetY );
+
+			this.context.lineTo( offsetX + this.timeToPixel ( this.loader.startTime, this.loader.endTime, this.loader.stringArray[this.arrayEnd-1][timestamp], width), this.height - offsetY );
+
 			this.context.closePath();
 			this.context.fillStyle = fill;
 			this.context.fill();

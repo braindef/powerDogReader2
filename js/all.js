@@ -36,8 +36,11 @@ ready(function() {
 
 	createGraphs(strings);
 
+	var site = new Site();
 	var loader = [];
 	var grapher = [];
+
+
 
 	for (var i=0; i<strings.length; i++)
 	{
@@ -45,7 +48,8 @@ ready(function() {
 		
 		loader[i] = new Loader(strings[i], document.getElementById(strings[i]));
 		grapher[i] = new Grapher(loader[i]);
-	
+		grapher.site = site;
+
 		loader[i].loadFiles();
 	}
 
