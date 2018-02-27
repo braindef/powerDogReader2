@@ -147,7 +147,7 @@ class Loader {
 		var countFiles = ( this.lastFileTime - this.startTime ) / day;
 		console.log("CountFiles: "+countFiles + " = " + this.lastFileTime + " - " + this.startTime + " day: " + day);
 
-		if (countFiles>10) return;
+		//if (countFiles>10) return;
 
 		var i=0;
 		for (i=0; i<countFiles; i++)
@@ -157,7 +157,7 @@ class Loader {
 				Day = this.lastFileTime - i * day;
 				console.log("Day: "+Day+"=lastFileTime: "+this.lastFileTime);
 				var file = this.loadFile( Day );
-				if (file != null)
+				if (file != null)				//file heisst versuch zu öffnen
 					this.xhr.push( file );
 			}
 		}

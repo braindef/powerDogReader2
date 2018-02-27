@@ -49,6 +49,7 @@ ready(function() {
 		loader[i] = new Loader(strings[i], document.getElementById(strings[i]));
 		grapher[i] = new Grapher(loader[i]);
 		grapher.site = site;
+		
 
 		loader[i].loadFiles();
 	}

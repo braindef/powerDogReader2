@@ -77,7 +77,12 @@ class Grapher {
 	}
 
 
-
+	getYmax()
+	{
+		this.yMax=this.getMinMaxOf2DIndex(this.loader.stringArray.slice(this.arrayStart, this.arrayEnd), pdc).max;
+		this.site.setYmax(yMax);	
+	}
+	
 	printGraph() {
 
 		//this.canvas = document.getElementById("myCanvas");
@@ -91,7 +96,7 @@ class Grapher {
 		var offsetY = this.height/12;
 
 		this.yMax=this.getMinMaxOf2DIndex(this.loader.stringArray.slice(this.arrayStart, this.arrayEnd), pdc).max;
-
+		//var yMax = this.site.yMax;
 
 		this.makeGrid(offsetX, offsetY, width, height);
 
