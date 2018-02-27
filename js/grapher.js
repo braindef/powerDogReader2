@@ -89,6 +89,10 @@ class Grapher {
 
 	printSubGraph(value, color, solid, fill)
 	{
+
+		this.makeAxis(this.width, this.height, 500, 500);
+
+
 		var yMax=this.getMinMaxOf2DIndex(this.loader.stringArray.slice(this.arrayStart, this.arrayEnd), value).max;
 
 		this.context.lineCap = 'round';
@@ -123,4 +127,22 @@ class Grapher {
 		}
 		this.context.stroke();
 	}
+
+
+	makeAxis(width, height, scaleFactorX, scaleFactorY)
+	{
+
+		this.drawLine ( this.width/12, this.height*11/12, this.width*11/12, this.height*11/12 );
+		this.drawLine ( this.width/12, this.height*11/12, this.width/12, this.height/12 );
+	}
+
+	drawLine(x0, y0, x1, y1)
+	{
+		this.context.beginPath();
+		this.context.strokeStyle = "#000000";
+		this.context.moveTo( x0, y0 );
+		this.context.lineTo( x1, y1 );
+		this.context.stroke();
+	}
+
 }
