@@ -2,7 +2,7 @@
 // Whole-script strict mode syntax
 //"use strict";
 
-var site;
+//var site;
 
 //konstanten spaltenbenennung fürs array <-> csv
 var timestamp=0;
@@ -30,13 +30,14 @@ class Site {
 		this.counter = 0;
 
 		this.loader = [];
-
-	
+		
 	}
 
 
 	moveLeft() {
 		alert("MOVE LEFT");
+		for (var i=0; i<this.loader.length; i++)
+			this.loader[i].grapher.moveLeft();
 	}
 
 	setYmax(value) {
@@ -77,7 +78,7 @@ class Site {
 		        '<canvas id="'+string+'" class="canvas" width="800" height="600" style="border:2px solid #d3d3d3; background-color: #FFFFFF">' +
 		                'Your browser does not support the HTML5 canvas tag.</canvas><br>' +
 		        '</div>' + 
-			' <button onclick="this.site.moveLeft()">&lt;</button>' +
+			' <button class="moveLeft">&lt;</button>' +
 			' <button onclick="moveRight()">&gt;</button>' +
 			' <input type="text" id="startTime" value="1518865004">' +
 			' <input type="text" id="endTime" value="1518884700">' +
@@ -109,7 +110,7 @@ var ready = function ( fn ) {
 // Example
 ready(function() {
 
-	site = new Site();
+	var site = new Site();
 
 	var strings = [ "B2_A2_S1", "B2_A2_S2", "B2_A3_S1", "B2_A3_S2" ];
 
@@ -131,6 +132,16 @@ ready(function() {
 		loader[i].loadFiles();
 
 	}
+
+  		var x = document.getElementsByClassName("moveLeft");
+  		for (var i = 0; i < x.length; i++) {
+	      		x[i].addEventListener("click", function(){
+			    site.moveLeft();
+			});
+		}
+
+  
+
 
 });
 
