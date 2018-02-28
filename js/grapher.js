@@ -167,22 +167,45 @@ class Grapher {
 		this.context.stroke();
 		this.context.closePath();
 
-		this.drawLegend();
+		this.drawLegendY();
+		this.drawLegendX();
+	}
+	
+	drawLegendX()
+	{
+		for (var i=2; i<11; i++)
+		{
+			var label = (12-i)/12 * this.yMax;
+		//	alert(this.yMax);
+			this.drawLabelX(this.width/12, this.height/12*i, (label/1000).toFixed(1.0));
+		}
 	}
 
-	drawLegend()
+	drawLegendY()
 	{
-		
 		for (var i=2; i<11; i++)
 		{
 			var label = (12-i)/12 * this.yMax;
 			//alert(this.yMax);
-			this.drawLabel(this.width/12, this.height/12*i, (label/1000).toFixed(1.0));
+			this.drawLabelY(this.width/12*i, this.height/12, (label/1000).toFixed(1.0));
 		}
 	}
 	
 
-	drawLabel(x, y, value)
+	drawLabelX(x, y, value)
+	{
+		this.drawLine( x, y-5, x, y+5 );
+		
+		this.context.beginPath();
+		this.context.strokeStyle = "#000000";
+		this.context.lineWidth = 0;
+		this.context.fillStyle = "#000000";
+		this.context.font = "20px Arial";
+		this.context.fillText(value,x-50,y);
+		this.context.closePath();
+	}
+
+	drawLabelY(x, y, value)
 	{
 		this.drawLine( x-5, y, x+5, y );
 		
