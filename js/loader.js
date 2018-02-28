@@ -5,11 +5,13 @@
 
 
 class Loader {
-	constructor(stringID, canvas) {
+	constructor(stringID, canvas, site) {
 
 		this.stringID = stringID;
 		this.canvas = canvas;
-		
+		this.site = site;
+	
+
 		//File Hander Stuff
 		this.nFiles=0;
 		this.xhr=[];
@@ -187,6 +189,7 @@ class Loader {
 			if (me.count==me.nFiles) {
 				me.createArray();
 				me.printArray();
+				me.site.setYmax (me.getMinMaxOf2DIndex(me.stringArray, pdc).max);
 				me.grapher.startup();
 			}
 		}; //hier darf man keine parameter übergeben wie (this.xhr[i], msg) sonst funktioniert das blöde XMLHttpRequest nicht richtig 

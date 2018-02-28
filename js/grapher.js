@@ -95,8 +95,8 @@ class Grapher {
 		var offsetX = this.width/12;
 		var offsetY = this.height/12;
 
-		this.yMax=this.getMinMaxOf2DIndex(this.loader.stringArray.slice(this.arrayStart, this.arrayEnd), pdc).max;
-		//var yMax = this.site.yMax;
+		//this.yMax=this.getMinMaxOf2DIndex(this.loader.stringArray.slice(this.arrayStart, this.arrayEnd), pdc).max;
+		this.yMax = this.loader.site.yMax;
 
 		this.makeGrid(offsetX, offsetY, width, height);
 
