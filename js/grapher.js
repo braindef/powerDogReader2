@@ -178,7 +178,7 @@ class Grapher {
 		{
 			var label = (12-i)/12 * this.yMax;
 			//alert(this.yMax);
-			this.drawLabel(this.width/12, this.height/12*i, (label/1000).toFixed(2));
+			this.drawLabel(this.width/12, this.height/12*i, (label/1000).toFixed(1.0));
 		}
 	}
 	

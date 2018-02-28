@@ -33,7 +33,12 @@ class Site {
 
 	
 	}
-	
+
+
+	moveLeft() {
+		alert("MOVE LEFT");
+	}
+
 	setYmax(value) {
 		if (value>this.yMax)
 		{
@@ -66,13 +71,18 @@ class Site {
 	addRow(string) {
 	    var div = document.createElement('div');
 
-	    div.className = 'graph';
+	    div.className = 'graph, center';
 
-	    div.innerHTML =
-		        '<div class="graph, center">' +
+	    div.innerHTML = '<h2>'+string+'</h2>' +
 		        '<canvas id="'+string+'" class="canvas" width="800" height="600" style="border:2px solid #d3d3d3; background-color: #FFFFFF">' +
 		                'Your browser does not support the HTML5 canvas tag.</canvas><br>' +
-		        '</div>';
+		        '</div>' + 
+			' <button onclick="this.site.moveLeft()">&lt;</button>' +
+			' <button onclick="moveRight()">&gt;</button>' +
+			' <input type="text" id="startTime" value="1518865004">' +
+			' <input type="text" id="endTime" value="1518884700">' +
+			' <button id="update" onclick="printGraph();">Update</button>';
+
 
 	    document.getElementById('content').appendChild(div);
 	}
@@ -118,11 +128,9 @@ ready(function() {
 		loader[i] = new Loader(strings[i], document.getElementById(strings[i]), site);
 		site.appendLoader(loader[i]);
 		grapher[i] = new Grapher(loader[i]);
+		loader[i].loadFiles();
 
 	}
-	
-	for (var i=0; i<strings.length; i++)
-		loader[i].loadFiles();
 
 });
 
