@@ -20,7 +20,7 @@ class Loader {
 		this.totalListLength = 0;
 
 
-		this.firstFileTime = Math.floor( new Date() /1000 ) - 2.5 * day;
+		this.firstFileTime = Math.floor( new Date() /1000 ) - 1.5 * day;
 		this.lastFileTime = Math.floor( new Date() / 1000);
 
 		this.alreadyLoaded = Math.floor( new Date() / 1000  );
@@ -146,7 +146,7 @@ class Loader {
 	loadFiles()
 	{
 		//countFiles = 6;
-		var countFiles = ( this.lastFileTime - this.startTime ) / day;
+		var countFiles = ( this.lastFileTime - this.startTime ) / day + 1;
 		console.log("CountFiles: "+countFiles + " = " + this.lastFileTime + " - " + this.startTime + " day: " + day);
 
 		//if (countFiles>10) return;

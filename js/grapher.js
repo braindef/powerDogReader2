@@ -47,8 +47,8 @@ class Grapher {
 
 
 	moveLeft() {
-		this.loader.startTime-=hour;
-		this.loader.endTime-=hour;
+		this.loader.startTime-=hour*6;
+		this.loader.endTime-=hour*6;
 		this.loader.loadFiles();
 		this.loader.createArray();
 		this.startup();
@@ -56,25 +56,12 @@ class Grapher {
 
 	
 	moveRight() {
-		this.loader.startTime+=hour;
-		this.loader.endTime+=hour;
+		this.loader.startTime+=hour*6;
+		this.loader.endTime+=hour*6;
 		this.loader.loadFiles();
 		this.loader.createArray();
 		this.startup();
 	}
-
-	/* Deprecated
-	moveRight() {
-		loader.startTime+=hour;	
-		endTime+=hour;
-		console.log("Endtime: " + endTime + " -- StartTime: " + startTime);
-		if (endTime>lastFileTime) endTime=lastFileTime;
-		if (endTime>lastFileTime) startTime=lastFileTime - day;
-		arrayStart = find(stringArray, timestamp, startTime);
-		arrayEnd = find(stringArray, timestamp, endTime);
-		loadFiles();
-		printGraph();
-	}*/
 
 
 	startup() {
