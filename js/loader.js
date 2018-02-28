@@ -20,7 +20,7 @@ class Loader {
 		this.totalListLength = 0;
 
 
-		this.firstFileTime = Math.floor( new Date() /1000 ) - 3 * day;
+		this.firstFileTime = Math.floor( new Date() /1000 ) - 2.5 * day;
 		this.lastFileTime = Math.floor( new Date() / 1000);
 
 		this.alreadyLoaded = Math.floor( new Date() / 1000  );

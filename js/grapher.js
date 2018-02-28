@@ -50,10 +50,20 @@ class Grapher {
 		this.loader.startTime-=hour;
 		this.loader.endTime-=hour;
 		this.loader.loadFiles();
-		this.printGraph();
+		this.loader.createArray();
+		this.startup();
 	}
 
+	
+	moveRight() {
+		this.loader.startTime+=hour;
+		this.loader.endTime+=hour;
+		this.loader.loadFiles();
+		this.loader.createArray();
+		this.startup();
+	}
 
+	/* Deprecated
 	moveRight() {
 		loader.startTime+=hour;	
 		endTime+=hour;
@@ -64,7 +74,7 @@ class Grapher {
 		arrayEnd = find(stringArray, timestamp, endTime);
 		loadFiles();
 		printGraph();
-	}
+	}*/
 
 
 	startup() {
@@ -123,8 +133,12 @@ class Grapher {
 
 
 		this.context.beginPath();
+
+
+		if (solid==true)
 		this.context.moveTo( offsetX + this.timeToPixel ( this.loader.startTime, this.loader.endTime, this.loader.startTime, width ),
-		 		 this.height - offsetY - this.loader.stringArray[this.arrayStart][value] / this.yMax * height );
+		 		 this.height - offsetY  );
+		 		 //this.height - offsetY - this.loader.stringArray[this.arrayStart][value] / this.yMax * height );
 
 
 		for (var i=this.arrayStart; i<this.arrayEnd; i++)

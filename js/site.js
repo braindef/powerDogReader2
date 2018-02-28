@@ -33,10 +33,14 @@ class Site {
 		
 	}
 
-
 	moveLeft() {
 		for (var i=0; i<this.loader.length; i++)
 			this.loader[i].grapher.moveLeft();
+	}
+
+	moveRight() {
+		for (var i=0; i<this.loader.length; i++)
+			this.loader[i].grapher.moveRight();
 	}
 
 	setYmax(value) {
@@ -78,7 +82,7 @@ class Site {
 		                'Your browser does not support the HTML5 canvas tag.</canvas><br>' +
 		        '</div>' + 
 			' <button class="moveLeft">&lt;</button>' +
-			' <button onclick="moveRight()">&gt;</button>' +
+			' <button class="moveRight">&gt;</button>' +
 			' <input type="text" id="startTime" value="1518865004">' +
 			' <input type="text" id="endTime" value="1518884700">' +
 			' <button id="update" onclick="printGraph();">Update</button>';
@@ -111,8 +115,7 @@ ready(function() {
 
 	var site = new Site();
 
-	var strings = [ "B2_A2_S1" ];
-		//, "B2_A2_S2", "B2_A3_S1", "B2_A3_S2" ];
+	var strings = [ "B2_A2_S1", "B2_A2_S2", "B2_A3_S1", "B2_A3_S2" ];
 
 	site.createGraphs(strings);
 
@@ -141,6 +144,12 @@ ready(function() {
 		}
 
   
+  		var x = document.getElementsByClassName("moveRight");
+  		for (var i = 0; i < x.length; i++) {
+	      		x[i].addEventListener("click", function(){
+			    site.moveRight();
+			});
+		}
 
 
 });
