@@ -35,7 +35,6 @@ class Site {
 
 
 	moveLeft() {
-		alert("MOVE LEFT");
 		for (var i=0; i<this.loader.length; i++)
 			this.loader[i].grapher.moveLeft();
 	}
@@ -112,7 +111,8 @@ ready(function() {
 
 	var site = new Site();
 
-	var strings = [ "B2_A2_S1", "B2_A2_S2", "B2_A3_S1", "B2_A3_S2" ];
+	var strings = [ "B2_A2_S1" ];
+		//, "B2_A2_S2", "B2_A3_S1", "B2_A3_S2" ];
 
 	site.createGraphs(strings);
 

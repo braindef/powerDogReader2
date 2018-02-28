@@ -47,12 +47,9 @@ class Grapher {
 
 
 	moveLeft() {
-		this.loader.startTime-=hour;	
-		this.loader.endTime-=hour;	
-		console.log("Endtime: " + this.loader.endTime + " -- StartTime: " + this.loader.startTime);
-		this.arrayStart = find(this.loader.stringArray, timestamp, loader.startTime);
-		this.arrayEnd = find(this.loader.stringArray, timestamp, loader.endTime);
-		this.loader.loadFiles();	
+		this.loader.startTime-=hour;
+		this.loader.endTime-=hour;
+		this.loader.loadFiles();
 		this.printGraph();
 	}
 
@@ -123,6 +120,7 @@ class Grapher {
 		this.context.setLineDash([]);
 		this.context.strokeStyle = color;
 		this.context.lineWidth=1;
+
 
 		this.context.beginPath();
 		this.context.moveTo( offsetX + this.timeToPixel ( this.loader.startTime, this.loader.endTime, this.loader.startTime, width ),
