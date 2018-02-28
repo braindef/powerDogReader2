@@ -21,19 +21,36 @@ var year = 365 * day;
 
 
 class Site {
-	constructor(temp) {
+	constructor(nGraphs) {
+
+		this.nGraphs = nGraphs;
 
 		this.yMax=0;
-		alert("constructor");
-	}
+		
+		this.counter = 0;
 
-	setYmax(value)
-	{	alert(this.yMax);
+		this.loader = [];
+
+	
+	}
+	
+	setYmax(value) {
 		if (value>this.yMax)
 		{
 			this.yMax = value;
 		}
-		alert(this.yMax);
+	}
+
+	incCounter()
+	{
+		this.counter++;
+		if (this.counter==this.nGraphs)
+			for (var i=0; i<this.nGraphs; i++)
+				this.loader[i].grapher.startup();
+	}
+
+	appendLoader(loader) {
+		this.loader.push(loader);
 	}
 
 
@@ -88,7 +105,7 @@ ready(function() {
 
 	site.createGraphs(strings);
 
-	var site = new Site();
+	var site = new Site(strings.length);
 	var loader = [];
 	var grapher = [];
 
@@ -99,13 +116,13 @@ ready(function() {
 
 		
 		loader[i] = new Loader(strings[i], document.getElementById(strings[i]), site);
+		site.appendLoader(loader[i]);
 		grapher[i] = new Grapher(loader[i]);
 
 	}
-		loader[0].loadFiles();
-		loader[1].loadFiles();
-		loader[2].loadFiles();
-		loader[3].loadFiles();
+	
+	for (var i=0; i<strings.length; i++)
+		loader[i].loadFiles();
 
 });
 

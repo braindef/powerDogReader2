@@ -190,7 +190,8 @@ class Loader {
 				me.createArray();
 				me.printArray();
 				me.site.setYmax (me.getMinMaxOf2DIndex(me.stringArray, pdc).max);
-				me.grapher.startup();
+				me.site.incCounter();
+				//me.grapher.startup();
 			}
 		}; //hier darf man keine parameter übergeben wie (this.xhr[i], msg) sonst funktioniert das blöde XMLHttpRequest nicht richtig 
 		xhttpr.send(null);
