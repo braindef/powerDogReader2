@@ -157,6 +157,11 @@ class Grapher {
 		}
 	}
 
+	daysInMonth (month, year) {
+	    return new Date(year, month, 0).getDate();
+	}
+
+	
 	makeGridVertical(startX, startY, endX, endY)
 	{
 		var drawWidth=this.width/12*10;
@@ -177,7 +182,7 @@ class Grapher {
 				this.drawLine(   drawBegin+drawWidth/steps*(i+1) - offsetDays * drawWidth / steps, this.height/12*1, 
 						 drawBegin+drawWidth/steps*(i+1) - offsetDays * drawWidth / steps, this.height/12*11);
 				this.drawLabelX( drawBegin+drawWidth/steps*(i+1) - offsetDays * drawWidth / steps, this.height/12*11,
-						 ((1+startDay+i)%31).toFixed(0));
+						 ((startDay+i)%(this.daysInMonth(datum.getFullYear(),datum.getMonth()+1)))+1);
 			}
 			return;
 		}
