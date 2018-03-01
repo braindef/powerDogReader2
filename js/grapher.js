@@ -92,6 +92,7 @@ class Grapher {
 		//this.yMax=this.getMinMaxOf2DIndex(this.loader.stringArray.slice(this.arrayStart, this.arrayEnd), pdc).max;
 		this.yMax = this.loader.site.yMax;
 
+		this.context.lineWidth = 1;
 		this.makeGridHorizontal(offsetX, offsetY, width, height);
 		this.makeGridVertical(offsetX, offsetY, width, height);
 
@@ -158,37 +159,43 @@ class Grapher {
 
 	makeGridVertical(startX, startY, endX, endY)
 	{
-		this.context.lineWidth = 1;
+		var drawWidth=this.width/12*10;
+		var drawBegin=this.width/12;
 		var days = (this.loader.endTime - this.loader.startTime) / day;
 		var hours = Math.round(24 * days);
 		var steps;
 		var datum = new Date(this.loader.startTime*1000);
+		var startDay = datum.getDate();
+		var offsetDays = datum.getHours()/24;
 		var startHour = datum.getHours();
 		var offsetHours = datum.getMinutes()/60;
-		alert(offsetHours);
 
-		if (days<31)
-		{
-			steps = 15;
-		}
-		
-		if (days<8) {
-			steps = 7;
+		if (days>1 && days<8) {
+			steps = days;
+		for (var i=0; i<steps; i++)
+			{
+				this.drawLine(   drawBegin+drawWidth/steps*(i+1) - offsetDays * drawWidth / steps, this.height/12*1, 
+						 drawBegin+drawWidth/steps*(i+1) - offsetDays * drawWidth / steps, this.height/12*11);
+				this.drawLabelX( drawBegin+drawWidth/steps*(i+1) - offsetDays * drawWidth / steps, this.height/12*11,
+						 ((1+startDay+i)%31).toFixed(0));
+			}
+			return;
 		}
 		
 		if (days<1) {
 			steps = hours;
+			for (var i=0; i<steps; i++)
+			{
+				this.drawLine(   drawBegin+drawWidth/steps*(i+1) - offsetHours * drawWidth / steps, this.height/12*1, 
+					         drawBegin+drawWidth/steps*(i+1) - offsetHours * drawWidth / steps, this.height/12*11);
+				this.drawLabelX( drawBegin+drawWidth/steps*(i+1) - offsetHours * drawWidth / steps, this.height/12*11,
+						 ((1+startHour+i)%24).toFixed(0));
+			}
+			return;
 		}
-
-		this.context.fillText("Days: "+days +" Hours: " + hours + " steps:"+ steps,  100, 100);
-
-		for (var i=0; i<steps; i++)
-		{
-			var drawWidth=this.width/12*10;
-			var drawBegin=this.width/12;
-			this.drawLine(   drawBegin+drawWidth/steps*(i+1) - offsetHours * drawWidth / steps, this.height/12*1, 
-				         drawBegin+drawWidth/steps*(i+1) - offsetHours * drawWidth / steps, this.height/12*11);
-			this.drawLabelX( drawBegin+drawWidth/steps*(i+1) - offsetHours * drawWidth / steps, this.height/steps*11, ((1+startHour+i)%24).toFixed(0));
+		
+		if (days<8) {
+			steps = days;
 		}
 	}
 
