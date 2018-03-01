@@ -158,9 +158,14 @@ class Grapher {
 
 	makeGridVertical(startX, startY, endX, endY)
 	{
+		this.context.lineWidth = 1;
 		var days = (this.loader.endTime - this.loader.startTime) / day;
+		var hours = Math.round(24 * days);
 		var steps;
-
+		var datum = new Date(this.loader.startTime*1000);
+		var startHour = datum.getHours();
+		var offsetHours = datum.getMinutes()/60;
+		alert(offsetHours);
 
 		if (days<31)
 		{
@@ -172,17 +177,18 @@ class Grapher {
 		}
 		
 		if (days<1) {
-			steps = 10;
+			steps = hours;
 		}
 
-		this.context.fillText(days +" "+ steps,  100, 100);
+		this.context.fillText("Days: "+days +" Hours: " + hours + " steps:"+ steps,  100, 100);
 
 		for (var i=0; i<steps; i++)
 		{
 			var drawWidth=this.width/12*10;
 			var drawBegin=this.width/12;
-			this.drawLine( drawBegin+drawWidth/steps*i, this.height/12*1, drawBegin+drawWidth/steps*i, this.height/12*11);
-			this.drawLabelX(drawWidth/steps*i, this.height/steps*11, i.toFixed(0));
+			this.drawLine(   drawBegin+drawWidth/steps*(i+1) - offsetHours * drawWidth / steps, this.height/12*1, 
+				         drawBegin+drawWidth/steps*(i+1) - offsetHours * drawWidth / steps, this.height/12*11);
+			this.drawLabelX( drawBegin+drawWidth/steps*(i+1) - offsetHours * drawWidth / steps, this.height/steps*11, ((1+startHour+i)%24).toFixed(0));
 		}
 	}
 
