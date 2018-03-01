@@ -183,6 +183,12 @@ class Loader {
 		var me = this;
 
 		xhttpr.open('POST', filename, true);
+
+		this.context = this.canvas.getContext("2d");
+		this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+		this.context.font="80px Calibri";
+		this.context.fillStyle = '#FF0000'
+		this.context.fillText("Loading Data...", this.grapher.width/5, this.grapher.height/2); //TODO
 		xhttpr.filename = filename;
 		xhttpr.onload = function () {
 			me.count++;

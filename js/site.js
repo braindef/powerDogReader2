@@ -29,31 +29,37 @@ class Site {
 		
 		this.counter = 0;
 
-		this.loader = [];
+		this.loaders = [];
 		
 	}
 
 	moveLeft() {
-		for (var i=0; i<this.loader.length; i++)
-			this.loader[i].grapher.moveLeft();
+		for (var i=0; i<this.loaders.length; i++)
+			this.loaders[i].grapher.moveLeft();
 	}
 
 	moveRight() {
-		for (var i=0; i<this.loader.length; i++)
-			this.loader[i].grapher.moveRight();
+		for (var i=0; i<this.loaders.length; i++)
+			this.loaders[i].grapher.moveRight();
 	}
 
 
 
 	oneWeek() {
-		for (var i=0; i<this.loader.length; i++)
+		for (var i=0; i<this.loaders.length; i++)
 		{
-			this.loader[i].startTime=new Date().getTime()/1000 - 7 * day;
-			this.loader[i].endTime=new Date().getTime()/1000;
-			this.loader[i].loadFiles();
-			this.loader[i].grapher.context.font="80px Calibri";
-			this.loader[i].grapher.context.fillStyle = '#FF0000'
-			this.loader[i].grapher.context.fillText("Loading Data...", this.loader[i].grapher.width/4, this.loader[i].grapher.height/2);
+			this.loaders[i].startTime=new Date().getTime()/1000 - 7 * day;
+			this.loaders[i].endTime=new Date().getTime()/1000;
+			this.loaders[i].loadFiles();
+		}
+	}
+	
+	oneMonth() {
+		for (var i=0; i<this.loaders.length; i++)
+		{
+			this.loaders[i].startTime=new Date().getTime()/1000 - 30 * day;
+			this.loaders[i].endTime=new Date().getTime()/1000;
+			this.loaders[i].loadFiles();
 		}
 	}
 
@@ -70,11 +76,11 @@ class Site {
 		this.counter++;
 		if (this.counter==this.nGraphs)
 			for (var i=0; i<this.nGraphs; i++)
-				this.loader[i].grapher.startup();
+				this.loaders[i].grapher.startup();
 	}
 
 	appendLoader(loader) {
-		this.loader.push(loader);
+		this.loaders.push(loader);
 	}
 
 
@@ -98,7 +104,8 @@ class Site {
 		        '</div>' + 
 			' <button class="moveLeft">&lt;</button>' +
 			' <button class="moveRight">&gt;</button>' +
-			' <button class="oneWeek">last Week</button>';
+			' <button class="oneWeek">last Week</button>' +
+			' <button class="oneMonth">last Month</button>';
 
 
 	    document.getElementById('content').appendChild(div);
@@ -175,6 +182,13 @@ ready(function() {
   		for (var i = 0; i < x.length; i++) {
 	      		x[i].addEventListener("click", function(){
 			    site.oneDay();
+			});
+		}
+  		
+		var x = document.getElementsByClassName("oneMonth");
+  		for (var i = 0; i < x.length; i++) {
+	      		x[i].addEventListener("click", function(){
+			    site.oneMonth();
 			});
 		}
 });
