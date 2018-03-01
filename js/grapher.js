@@ -92,7 +92,8 @@ class Grapher {
 		//this.yMax=this.getMinMaxOf2DIndex(this.loader.stringArray.slice(this.arrayStart, this.arrayEnd), pdc).max;
 		this.yMax = this.loader.site.yMax;
 
-		this.makeGrid(offsetX, offsetY, width, height);
+		this.makeGridHorizontal(offsetX, offsetY, width, height);
+		this.makeGridVertical(offsetX, offsetY, width, height);
 
 		this.printSubGraph(pac, "#FF0000", true, "rgba(255, 0, 0, 0.6)");
 		this.printSubGraph(pdc, "#FFFF00", true, "rgba(255, 255, 0, 0.6)");
@@ -147,8 +148,7 @@ class Grapher {
 		this.context.stroke();
 	}
 
-
-	makeGrid(startX, startY, endX, endY)
+	makeGridHorizontal(startX, startY, endX, endY)
 	{
 		for (var i=2; i<11; i++)
 		{
@@ -156,6 +156,35 @@ class Grapher {
 		}
 	}
 
+	makeGridVertical(startX, startY, endX, endY)
+	{
+		var days = (this.loader.endTime - this.loader.startTime) / day;
+		var steps;
+
+
+		if (days<31)
+		{
+			steps = 15;
+		}
+		
+		if (days<8) {
+			steps = 7;
+		}
+		
+		if (days<1) {
+			steps = 10;
+		}
+
+		this.context.fillText(days +" "+ steps,  100, 100);
+
+		for (var i=0; i<steps; i++)
+		{
+			var drawWidth=this.width/12*10;
+			var drawBegin=this.width/12;
+			this.drawLine( drawBegin+drawWidth/steps*i, this.height/12*1, drawBegin+drawWidth/steps*i, this.height/12*11);
+			this.drawLabelX(drawWidth/steps*i, this.height/steps*11, i.toFixed(0));
+		}
+	}
 
 	makeAxis(startX, startY, endX, endY)
 	{
@@ -168,7 +197,7 @@ class Grapher {
 		this.context.closePath();
 
 		this.drawLegendY();
-		this.drawLegendX();
+		//this.drawLegendX();
 	}
 	
 	drawLegendY()
