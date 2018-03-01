@@ -50,7 +50,7 @@ class Grapher {
 		this.loader.startTime-=hour*6;
 		this.loader.endTime-=hour*6;
 		this.loader.loadFiles();
-		this.loader.createArray();
+		//this.loader.createArray();
 		this.startup();
 	}
 
@@ -59,7 +59,7 @@ class Grapher {
 		this.loader.startTime+=hour*6;
 		this.loader.endTime+=hour*6;
 		this.loader.loadFiles();
-		this.loader.createArray();
+		//this.loader.createArray();
 		this.startup();
 	}
 
@@ -171,23 +171,23 @@ class Grapher {
 		this.drawLegendX();
 	}
 	
-	drawLegendX()
-	{
-		for (var i=2; i<11; i++)
-		{
-			var label = (12-i)/12 * this.yMax;
-		//	alert(this.yMax);
-			this.drawLabelX(this.width/12, this.height/12*i, (label/1000).toFixed(1.0));
-		}
-	}
-
 	drawLegendY()
 	{
 		for (var i=2; i<11; i++)
 		{
 			var label = (12-i)/12 * this.yMax;
-			//alert(this.yMax);
-			this.drawLabelY(this.width/12*i, this.height/12, (label/1000).toFixed(1.0));
+		//	alert(this.yMax);
+			this.drawLabelY(this.width/12, this.height/12*i, (label/1000).toFixed(1.0));
+		}
+	}
+
+	drawLegendX()
+	{
+		for (var i=2; i<11; i++)
+		{
+			var label = new Date(this.loader.startTime+i*hour).getHours();
+			////alert(label);
+			this.drawLabelX(this.width/12*i, this.height/12*11, label.toFixed(0));
 		}
 	}
 	
@@ -201,7 +201,7 @@ class Grapher {
 		this.context.lineWidth = 0;
 		this.context.fillStyle = "#000000";
 		this.context.font = "20px Arial";
-		this.context.fillText(value,x-50,y);
+		this.context.fillText(value,x-20,y+30);
 		this.context.closePath();
 	}
 

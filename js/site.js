@@ -43,6 +43,21 @@ class Site {
 			this.loader[i].grapher.moveRight();
 	}
 
+
+
+	oneWeek() {
+		for (var i=0; i<this.loader.length; i++)
+		{
+			this.loader[i].startTime=new Date().getTime()/1000 - 7 * day;
+			this.loader[i].endTime=new Date().getTime()/1000;
+			this.loader[i].loadFiles();
+			this.loader[i].grapher.context.font="80px Calibri";
+			this.loader[i].grapher.context.fillStyle = '#FF0000'
+			this.loader[i].grapher.context.fillText("Loading Data...", this.loader[i].grapher.width/4, this.loader[i].grapher.height/2);
+		}
+	}
+
+
 	setYmax(value) {
 		if (value>this.yMax)
 		{
@@ -83,9 +98,7 @@ class Site {
 		        '</div>' + 
 			' <button class="moveLeft">&lt;</button>' +
 			' <button class="moveRight">&gt;</button>' +
-			' <input type="text" id="startTime" value="1518865004">' +
-			' <input type="text" id="endTime" value="1518884700">' +
-			' <button id="update" onclick="printGraph();">Update</button>';
+			' <button class="oneWeek">last Week</button>';
 
 
 	    document.getElementById('content').appendChild(div);
@@ -151,7 +164,19 @@ ready(function() {
 			});
 		}
 
+  		var x = document.getElementsByClassName("oneWeek");
+  		for (var i = 0; i < x.length; i++) {
+	      		x[i].addEventListener("click", function(){
+			    site.oneWeek();
+			});
+		}
 
+  		var x = document.getElementsByClassName("oneDay");
+  		for (var i = 0; i < x.length; i++) {
+	      		x[i].addEventListener("click", function(){
+			    site.oneDay();
+			});
+		}
 });
 
 
