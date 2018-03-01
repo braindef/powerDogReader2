@@ -175,6 +175,22 @@ class Grapher {
 		var startHour = datum.getHours();
 		var offsetHours = datum.getMinutes()/60;
 
+
+
+		if (days>8) {
+			steps = Math.round(days/4);
+		for (var i=0; i<steps; i++)
+			{
+				this.drawLine(   drawBegin+drawWidth/steps*(i+1), this.height/12*1, 
+						 drawBegin+drawWidth/steps*(i+1), this.height/12*11);
+				this.drawLabelX( drawBegin+drawWidth/steps*(i+1), this.height/12*11,
+						 ((-1+startDay+i*4)%(this.daysInMonth(datum.getFullYear(),datum.getMonth()+1)))+1);
+			}
+			return;
+		}
+
+
+
 		if (days>1 && days<8) {
 			steps = days;
 		for (var i=0; i<steps; i++)
