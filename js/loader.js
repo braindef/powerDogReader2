@@ -149,8 +149,6 @@ class Loader {
 		var countFiles = ( this.lastFileTime - this.startTime ) / day + 1;
 		console.log("CountFiles: "+countFiles + " = " + this.lastFileTime + " - " + this.startTime + " day: " + day);
 
-		//if (countFiles>10) return;
-
 		var i=0;
 		for (i=0; i<countFiles; i++)
 		{
@@ -160,7 +158,9 @@ class Loader {
 				console.log("Day: "+Day+"=lastFileTime: "+this.lastFileTime);
 				var file = this.loadFile( Day );
 				if (file != null)				//file heisst versuch zu öffnen
+				{
 					this.xhr.push( file );
+				}
 			}
 		}
 	}
@@ -171,6 +171,7 @@ class Loader {
 		//Hinweis, allenfalls fetch und promise verwenden
 		var xhttpr = new XMLHttpRequest();
 		var filename = this.getFilenameByTimestamp(this.stringID, unixTimestamp*1000);
+		var nothingNew = true;
 	
 		for(var i=0; i<this.xhr.length; i++)
 			if (this.xhr[i].filename == filename)
@@ -178,6 +179,7 @@ class Loader {
 				console.log("this.xhr[i].file==file");
 				return null;
 			}
+
 		this.nFiles++;
 
 		var me = this;

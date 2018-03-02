@@ -44,6 +44,16 @@ class Site {
 	}
 
 
+	oneDay() {
+		for (var i=0; i<this.loaders.length; i++)
+		{
+			this.loaders[i].startTime=new Date().getTime()/1000 - 1 * day;
+			this.loaders[i].endTime=new Date().getTime()/1000;
+			this.loaders[i].loadFiles();
+			this.loaders[i].grapher.startup();
+		}
+	}
+	
 
 	oneWeek() {
 		for (var i=0; i<this.loaders.length; i++)
@@ -51,6 +61,7 @@ class Site {
 			this.loaders[i].startTime=new Date().getTime()/1000 - 7 * day;
 			this.loaders[i].endTime=new Date().getTime()/1000;
 			this.loaders[i].loadFiles();
+			this.loaders[i].grapher.startup();
 		}
 	}
 	
@@ -60,6 +71,7 @@ class Site {
 			this.loaders[i].startTime=new Date().getTime()/1000 - 30 * day;
 			this.loaders[i].endTime=new Date().getTime()/1000;
 			this.loaders[i].loadFiles();
+			this.loaders[i].grapher.startup();
 		}
 	}
 
@@ -104,8 +116,9 @@ class Site {
 		        '</div>' + 
 			' <button class="moveLeft">&lt;</button>' +
 			' <button class="moveRight">&gt;</button>' +
-			' <button class="oneWeek">last Week</button>' +
-			' <button class="oneMonth">last Month</button>';
+			' <button class="oneDay">Today</button>' +
+			' <button class="oneWeek">Last Week</button>' +
+			' <button class="oneMonth">Last Month</button>';
 
 
 	    document.getElementById('content').appendChild(div);

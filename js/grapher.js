@@ -203,7 +203,7 @@ class Grapher {
 			return;
 		}
 		
-		if (days<1) {
+		if (days<=1) {
 			steps = hours;
 			for (var i=0; i<steps; i++)
 			{
