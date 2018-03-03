@@ -15,6 +15,8 @@ class Grapher {
 	this.arrayStart=0;
 	this.arrayEnd=28;
 
+	this.days;
+
 	this.site;
 	}
 
@@ -109,16 +111,16 @@ class Grapher {
 		this.context.moveTo( offsetX , offsetY + height);
 
 
-		var days = this.daysInMonth(new Date(this.loader.timestamp*1000).getMonth()+1, new Date(this.loader.timestamp*1000).getFullYear()); 
+		this.days = this.daysInMonth(new Date(this.loader.timestamp*1000).getMonth()+1, new Date(this.loader.timestamp*1000).getFullYear()); 
 
 
-		for (var i=this.arrayStart; i<days; i++)
+		for (var i=this.arrayStart; i<this.days; i++)
 		{
 			if (i<this.arrayEnd-1) {
-				this.context.lineTo( offsetX + i * width/(days), this.height - offsetY - this.loader.stringArray[i][value] / this.yMax * height);
+				this.context.lineTo( offsetX + i * width/(this.days), this.height - offsetY - this.loader.stringArray[i][value] / this.yMax * height);
 			}
 			if (i>this.arrayEnd-1) {
-				this.context.lineTo( offsetX + i * width/(days), this.height - offsetY );
+				this.context.lineTo( offsetX + i * width/(this.days), this.height - offsetY );
 			}
 			
 		}
@@ -163,47 +165,16 @@ class Grapher {
 
 
 
-		if (days>8) {
-			steps = Math.round(days/4);
-		for (var i=0; i<steps; i++)
+		steps = this.days; 
+		for (var i=0; i<this.days; i++)
 			{
 				this.drawLine(   drawBegin+drawWidth/steps*(i+1), this.height/12*1, 
 						 drawBegin+drawWidth/steps*(i+1), this.height/12*11);
-				this.drawLabelX( drawBegin+drawWidth/steps*(i+1), this.height/12*11,
-						 ((-1+startDay+i*4)%(this.daysInMonth(datum.getFullYear(),datum.getMonth()+1)))+1);
+				this.drawLabelX( drawBegin+drawWidth/steps*(i+1), this.height/12*11+(i%2)*20-10,
+						 i+1);
 			}
-			return;
-		}
 
 
-
-		if (days>1 && days<8) {
-			steps = days;
-		for (var i=0; i<steps; i++)
-			{
-				this.drawLine(   drawBegin+drawWidth/steps*(i+1) - offsetDays * drawWidth / steps, this.height/12*1, 
-						 drawBegin+drawWidth/steps*(i+1) - offsetDays * drawWidth / steps, this.height/12*11);
-				this.drawLabelX( drawBegin+drawWidth/steps*(i+1) - offsetDays * drawWidth / steps, this.height/12*11,
-						 ((startDay+i)%(this.daysInMonth(datum.getFullYear(),datum.getMonth()+1)))+1);
-			}
-			return;
-		}
-		
-		if (days<=1) {
-			steps = hours;
-			for (var i=0; i<steps; i++)
-			{
-				this.drawLine(   drawBegin+drawWidth/steps*(i+1) - offsetHours * drawWidth / steps, this.height/12*1, 
-					         drawBegin+drawWidth/steps*(i+1) - offsetHours * drawWidth / steps, this.height/12*11);
-				this.drawLabelX( drawBegin+drawWidth/steps*(i+1) - offsetHours * drawWidth / steps, this.height/12*11,
-						 ((1+startHour+i)%24).toFixed(0));
-			}
-			return;
-		}
-		
-		if (days<8) {
-			steps = days;
-		}
 	}
 
 	makeAxis(startX, startY, endX, endY)
@@ -232,18 +203,18 @@ class Grapher {
 
 	drawLegendX()
 	{
-		for (var i=2; i<11; i++)
+		for (var i=0; i<11; i++)
 		{
 			var label = new Date(this.loader.startTime+i*hour).getHours();
 			////alert(label);
-			this.drawLabelX(this.width/12*i, this.height/12*11, label.toFixed(0));
+			this.drawLabelX(this.width/12*i, this.height/12*11, 4);
 		}
 	}
 	
 
 	drawLabelX(x, y, value)
 	{
-		this.drawLine( x, y-5, x, y+5 );
+		//this.drawLine( x, y-5, x, y+5 );
 		
 		this.context.beginPath();
 		this.context.strokeStyle = "#000000";
