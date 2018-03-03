@@ -123,8 +123,7 @@ ready(function() {
 
 	var site = new Site();
 
-	var strings = [ "B2_A2_S1"];
-		//, "B2_A2_S2", "B2_A3_S1", "B2_A3_S2" ];
+	var strings = [ "B2_A2_S1"], "B2_A2_S2", "B2_A3_S1", "B2_A3_S2" ];
 
 	site.createGraphs(strings);
 
