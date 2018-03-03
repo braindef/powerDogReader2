@@ -1,0 +1,3 @@
+day;month;year;address;bus;strings;stringid;produces_day;pac_max;whday_offset
+1;3;2018;3;2;2;2;473;115;0
+2;3;2018;3;2;2;2;434;64;0
