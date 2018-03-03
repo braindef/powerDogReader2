@@ -123,7 +123,8 @@ ready(function() {
 
 	var site = new Site();
 
-	var strings = [ "B2_A2_S1", "B2_A2_S2", "B2_A3_S1", "B2_A3_S2" ];
+	var strings = [ "B2_A2_S1"];
+		//, "B2_A2_S2", "B2_A3_S1", "B2_A3_S2" ];
 
 	site.createGraphs(strings);
 
@@ -140,7 +141,8 @@ ready(function() {
 		loader[i] = new Loader(strings[i], document.getElementById(strings[i]), site);
 		site.appendLoader(loader[i]);
 		grapher[i] = new Grapher(loader[i]);
-		loader[i].loadFile(new Date().getTime()/1000-month);
+
+		loader[i].loadFile(new Date().getTime()/1000);
 
 	}
 

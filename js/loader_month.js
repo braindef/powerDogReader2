@@ -12,6 +12,8 @@ class Loader {
 
 		this.stringArray=[];
 
+		this.timestamp;
+		
 		this.myString;
 
 		this.grapher;
@@ -22,6 +24,8 @@ class Loader {
 	createArray()
 	{	
 		this.lines = this.xhttpr.response.split(/\r\n|\r|\n/).length;
+		this.grapher.arrayEnd=this.lines-1;
+
 		for (var i=0; i<this.lines-1-1; i++)
 			for (var j=0; j<9; j++)
 			{
@@ -79,6 +83,9 @@ class Loader {
 	loadFile(monthTimestamp)
 	{	
 		//Hinweis, allenfalls fetch und promise verwenden
+		
+		this.timestamp = monthTimestamp;
+		
 		this.xhttpr = new XMLHttpRequest();
 		var filename = this.getFilenameByTimestamp(this.stringID, monthTimestamp*1000);
 		var nothingNew = true;

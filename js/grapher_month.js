@@ -37,23 +37,20 @@ class Grapher {
 
 
 	moveLeft() {
-		//TODO
-		this.loader.loadFiles();
-		//this.loader.createArray();
+		this.loader.timestamp = this.loader.timestamp - month;
+		this.loader.loadFile(this.loader.timestamp);
 		this.startup();
 	}
 
 	
 	moveRight() {
-		//TODO
-		this.loader.loadFiles();
-		//this.loader.createArray();
+		this.loader.timestamp = this.loader.timestamp + month;
+		this.loader.loadFile(this.loader.timestamp);
 		this.startup();
 	}
 
 
 	startup() {
-		//TODO
 		this.printGraph();
 	}
 
@@ -112,25 +109,33 @@ class Grapher {
 		this.context.moveTo( offsetX , offsetY + height);
 
 
-		for (var i=this.arrayStart; i<this.arrayEnd-1; i++)
+		var days = this.daysInMonth(new Date(this.loader.timestamp*1000).getMonth()+1, new Date(this.loader.timestamp*1000).getFullYear()); 
+
+
+		for (var i=this.arrayStart; i<days; i++)
 		{
-		this.context.lineTo( offsetX + i * width/(this.arrayEnd-1), this.height - offsetY - this.loader.stringArray[i][value] / this.yMax * height);
+			if (i<this.arrayEnd-1) {
+				this.context.lineTo( offsetX + i * width/(days), this.height - offsetY - this.loader.stringArray[i][value] / this.yMax * height);
+			}
+			if (i>this.arrayEnd-1) {
+				this.context.lineTo( offsetX + i * width/(days), this.height - offsetY );
+			}
+			
 		}
+
 		
+		this.context.lineTo( offsetX + width, this.height - offsetY );
 
-		if (solid==true)
-		{
-
-			this.context.lineTo( offsetX + i * width/(this.arrayEnd-1), this.height - offsetY );
-
-			this.context.closePath();
-			this.context.fillStyle = fill;
-			this.context.fill();
-		}
+		this.context.closePath();
+		
+		this.context.fillStyle = fill;
+		
+		this.context.fill();
+	
 		this.context.stroke();
 	}
 
-	makeGridHorizontal(startX, startY, endX, endY)
+		makeGridHorizontal(startX, startY, endX, endY)
 	{
 		for (var i=2; i<11; i++)
 		{
