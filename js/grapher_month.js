@@ -90,6 +90,7 @@ class Grapher {
 		this.yMax = this.loader.site.yMax;
 
 		this.context.lineWidth = 1;
+		this.context.setLineDash( [5, 5] );
 		this.makeGridHorizontal(offsetX, offsetY, width, height);
 		this.makeGridVertical(offsetX, offsetY, width, height);
 
