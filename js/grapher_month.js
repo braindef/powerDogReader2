@@ -120,7 +120,8 @@ class Grapher {
 				this.context.lineTo( offsetX + i * width/(this.days), this.height - offsetY - this.loader.stringArray[i][value] / this.yMax * height);
 			}
 			if (i>this.arrayEnd-1) {
-				this.context.lineTo( offsetX + i * width/(this.days), this.height - offsetY );
+				this.context.lineTo( offsetX + (i-1) * width/(this.days), this.height - offsetY );
+			//	alert(( offsetX + (i-1) * width/(this.days), this.height - offsetY ));
 			}
 			
 		}
