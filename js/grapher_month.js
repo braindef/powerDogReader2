@@ -130,7 +130,22 @@ class Grapher {
 		for (var i=this.arrayStart; i<this.days; i++)
 		{
 			if (i<this.arrayEnd-1) {
-				this.context.lineTo( offsetX + i * width/(this.days), this.height - offsetY - this.loader.stringArray[i][value] / this.yMax * height * 0.9);
+		//with quadraticCurve
+		//try {
+		//	var xc = (( offsetX + (i-1) * width/(this.days) ) + (offsetX + i * width/(this.days) ) )/2;
+		//
+		//	var yc = (( this.height - offsetY - this.loader.stringArray[i-1] / this.yMax * height * 0.9)+
+		//		 ( this.height - offsetY - this.loader.stringArray[i-1] / this.yMax * height * 0.9))/2;
+		//
+		//
+		//	this.context.quadraticCurveTo( xc, yc,
+		//		offsetX + i * width/(this.days),
+		//		this.height - offsetY - this.loader.stringArray[i][value] / this.yMax * height * 0.9);
+		//
+		//} catch(err) {
+		//	alert(err.message);
+		//}
+			this.context.lineTo( offsetX + i * width/(this.days), this.height - offsetY - this.loader.stringArray[i][value] / this.yMax * height * 0.9);
 			}
 			if (i>this.arrayEnd-1) {
 				this.context.lineTo( offsetX + (i-1) * width/(this.days), this.height - offsetY );
