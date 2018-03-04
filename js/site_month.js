@@ -46,8 +46,8 @@ class Site {
 	currentMonth() {
 		for (var i=0; i<this.loaders.length; i++)
 		{
-			this.loaders[i].startTime=new Date().getTime()/1000 - 30 * day;
-			this.loaders[i].endTime=new Date().getTime()/1000;
+			this.loaders[i].timestamp = new Date().getTime()/1000-1*day;
+			this.loaders[i].loadFile(this.loaders[i].timestamp);
 			this.loaders[i].grapher.startup();
 		}
 	}
@@ -160,19 +160,6 @@ ready(function() {
 			});
 		}
 
-  		var x = document.getElementsByClassName("oneWeek");
-  		for (var i = 0; i < x.length; i++) {
-	      		x[i].addEventListener("click", function(){
-			    site.oneWeek();
-			});
-		}
-
-  		var x = document.getElementsByClassName("oneDay");
-  		for (var i = 0; i < x.length; i++) {
-	      		x[i].addEventListener("click", function(){
-			    site.oneDay();
-			});
-		}
   		
 		var x = document.getElementsByClassName("currentMonth");
   		for (var i = 0; i < x.length; i++) {
