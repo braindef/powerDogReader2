@@ -1,2 +1,0 @@
-id;timestamp;address;bus;errortype;errorcode;data;acknowleged
-152292;1519641304;2;3;20;100;2_2_1\;2_3_2_\;1.1718\;0.67507\;0.4166\;0.15;1

@@ -1,4 +1,0 @@
-month;year;address;bus;strings;stringid;produced_month;day_start_min;day_end_max
-1;2018;2;2;2;2;497582;8;18
-2;2018;2;2;2;2;670672;7;19
-3;2018;2;2;2;2;26101;7;19

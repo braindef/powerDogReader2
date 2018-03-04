@@ -1,7 +1,0 @@
-id;timestamp;address;bus;errortype;errorcode;data;acknowleged
-152510;1519760103;2;3;30;105;2_2_1\;2_3_2_\;4.4988\;2.83874\;2.1806\;0.15;1
-152452;1519727700;2;3;20;100;2_2_1\;2_3_2_\;1.0463\;0.616293\;0.4038\;0.15;1
-152426;1519713698;0;0;10;1152;PowerDog Live: Unable to Auth, giving up! vpn.power-dog.eu AuthID: 8167;0
-152425;1519713395;2;3;10;6;;0
-152424;1519713394;2;2;10;6;;0
-152423;1519713083;0;0;10;1152;PowerDog Live: Permission denied, please try again.;0

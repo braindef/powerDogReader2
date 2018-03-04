@@ -1,1 +1,0 @@
-id;timestamp;address;bus;errortype;errorcode;data;acknowleged
