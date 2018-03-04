@@ -1,7 +1,9 @@
 # powerDogReader2
 
+Displays Graphs from PowerDOG Solar Plant FTP Directory
 
-Load 1000 Files with http protocol:
-http://192.168.192.234/toni3/powerDogReader2/variante3.html
+To install copy all html, js and css files to the FTP Directory where your PowerDOG Device stores your history files, eg B2_A2_S1_global_2_12_2018.txt
 
-![Beispiel](https://raw.githubusercontent.com/braindef/powerDogReader2/master/beispiel.png)
+Then modify the strings filed in site*.js to select all the strings your device has.
+
+
