@@ -129,7 +129,7 @@ class Grapher {
 		for (var i=this.arrayStart; i<this.days; i++)
 		{
 			if (i<this.arrayEnd-1) {
-				this.context.lineTo( offsetX + i * width/(this.days), this.height - offsetY - this.loader.stringArray[i][value] / this.yMax * height);
+				this.context.lineTo( offsetX + i * width/(this.days), this.height - offsetY - this.loader.stringArray[i][value] / this.yMax * height * 0.9);
 			}
 			if (i>this.arrayEnd-1) {
 				this.context.lineTo( offsetX + (i-1) * width/(this.days), this.height - offsetY );
@@ -209,8 +209,7 @@ class Grapher {
 		for (var i=2; i<11; i++)
 		{
 			var label = (12-i)/12 * this.yMax;
-		//	alert(this.yMax);
-			this.drawLabelY(this.width/12, this.height/12*i, (label/1000).toFixed(1.0));
+			this.drawLabelY(this.width/12, this.height/12*i, ((label/1000)/0.9).toFixed(1.0));
 		}
 	}
 

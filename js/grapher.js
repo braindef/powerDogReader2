@@ -6,8 +6,6 @@ class Grapher {
 	this.loader.grapher=this;
 
 	//grafik parameter
-	//	this.height=loader.canvas.height;
-	//	this.width=loader.canvas.width;
 	this.height=600;
 	this.width=800;
 
@@ -50,7 +48,6 @@ class Grapher {
 		this.loader.startTime-=hour*6;
 		this.loader.endTime-=hour*6;
 		this.loader.loadFiles();
-		//this.loader.createArray();
 		this.startup();
 	}
 
@@ -59,7 +56,6 @@ class Grapher {
 		this.loader.startTime+=hour*6;
 		this.loader.endTime+=hour*6;
 		this.loader.loadFiles();
-		//this.loader.createArray();
 		this.startup();
 	}
 
@@ -73,13 +69,12 @@ class Grapher {
 
 	getYmax()
 	{
-		this.yMax=this.getMinMaxOf2DIndex(this.loader.stringArray.slice(this.arrayStart, this.arrayEnd), pdc).max;
+		this.yMax=(this.getMinMaxOf2DIndex(this.loader.stringArray.slice(this.arrayStart, this.arrayEnd), pdc).max);
 		this.site.setYmax(yMax);	
 	}
 	
 	printGraph() {
 
-		//this.canvas = document.getElementById("myCanvas");
 		this.context = this.canvas.getContext("2d");
 		this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 		
@@ -89,7 +84,6 @@ class Grapher {
 		var offsetX = this.width/12;
 		var offsetY = this.height/12;
 
-		//this.yMax=this.getMinMaxOf2DIndex(this.loader.stringArray.slice(this.arrayStart, this.arrayEnd), pdc).max;
 		this.yMax = this.loader.site.yMax;
 
 		this.context.lineWidth = 1;
@@ -127,13 +121,12 @@ class Grapher {
 		if (solid==true)
 		this.context.moveTo( offsetX + this.timeToPixel ( this.loader.startTime, this.loader.endTime, this.loader.startTime, width ),
 		 		 this.height - offsetY  );
-		 		 //this.height - offsetY - this.loader.stringArray[this.arrayStart][value] / this.yMax * height );
 
 
 		for (var i=this.arrayStart; i<this.arrayEnd; i++)
 		{
 		this.context.lineTo( offsetX + this.timeToPixel ( this.loader.startTime, this.loader.endTime, this.loader.stringArray[i][timestamp], width ),
-					this.height - offsetY - this.loader.stringArray[i][value] / this.yMax * height);
+					this.height - offsetY - this.loader.stringArray[i][value] / this.yMax * height * 0.9);
 		}
 		
 
@@ -239,8 +232,7 @@ class Grapher {
 		for (var i=2; i<11; i++)
 		{
 			var label = (12-i)/12 * this.yMax;
-		//	alert(this.yMax);
-			this.drawLabelY(this.width/12, this.height/12*i, (label/1000).toFixed(1.0));
+			this.drawLabelY(this.width/12, this.height/12*i, ((label/1000)/0.9).toFixed(1.0));
 		}
 	}
 
@@ -249,7 +241,6 @@ class Grapher {
 		for (var i=2; i<11; i++)
 		{
 			var label = new Date(this.loader.startTime+i*hour).getHours();
-			////alert(label);
 			this.drawLabelX(this.width/12*i, this.height/12*11, label.toFixed(0));
 		}
 	}
