@@ -232,7 +232,7 @@ class Grapher {
 		for (var i=2; i<11; i++)
 		{
 			var label = (12-i)/12 * this.yMax;
-			this.drawLabelY(this.width/12, this.height/12*i, ((label/1000)/0.9).toFixed(1.0));
+			this.drawLabelY(this.width/12, this.height/12*i, ((label/1000)/0.9).toFixed(0)+" kW");
 		}
 	}
 
@@ -268,7 +268,7 @@ class Grapher {
 		this.context.lineWidth = 0;
 		this.context.fillStyle = "#000000";
 		this.context.font = "20px Arial";
-		this.context.fillText(value,x-50,y);
+		this.context.fillText(value,x-65,y);
 		this.context.closePath();
 	}
 
