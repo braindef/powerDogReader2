@@ -7,3 +7,6 @@ To install copy all html, js and css files to the FTP Directory where your Power
 Then modify the strings filed in site*.js to select all the strings your device has.
 
 
+
+
+![https://raw.githubusercontent.com/braindef/powerDogReader2/master/screenshot1.png](https://raw.githubusercontent.com/braindef/powerDogReader2/master/screenshot1.png) ![https://raw.githubusercontent.com/braindef/powerDogReader2/master/screenshot2.png](https://raw.githubusercontent.com/braindef/powerDogReader2/master/screenshot2.png)
