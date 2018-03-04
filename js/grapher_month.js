@@ -75,6 +75,18 @@ class Grapher {
 		var offsetX = this.width/12;
 		var offsetY = this.height/12;
 
+		var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+		var title = months[new Date(this.loader.timestamp*1000).getMonth()] +" "+ new Date(this.loader.timestamp*1000).getFullYear();
+
+		this.context.beginPath();
+		this.context.strokeStyle = "#000000";
+		this.context.lineWidth = 0;
+		this.context.fillStyle = "#0000FF";
+		this.context.font = "30px Arial";
+		this.context.fillText(title,width/2, 35);
+		this.context.closePath();
+
 		this.yMax = this.loader.site.yMax;
 
 		this.context.lineWidth = 1;
