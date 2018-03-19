@@ -119,15 +119,14 @@ class Grapher {
 		this.context.beginPath();
 
 		if (solid==true)
-		this.context.moveTo( offsetX + this.timeToPixel ( this.loader.startTime, this.loader.endTime, this.loader.startTime, width ),
-		 		 this.height - offsetY  );
+			this.context.moveTo( offsetX + this.timeToPixel ( this.loader.startTime, this.loader.endTime, this.loader.stringArray[this.arrayStart][timestamp], width), this.height - offsetY );
 
 
 		for (var i=this.arrayStart; i<this.arrayEnd; i+=2)
 		{
 		//with quadraticCurve
 		try {
-			var xc = ((  offsetX + this.timeToPixel ( this.loader.startTime, this.loader.endTime, this.loader.stringArray[i-1][timestamp], width )) +
+			var xc = ((  offsetX + this.timeToPixel ( this.loader.startTime, this.loader.endTime, this.loader.stringArray[i][timestamp], width )) +
 			      (  offsetX + this.timeToPixel ( this.loader.startTime, this.loader.endTime, this.loader.stringArray[i][timestamp], width )))/2;
 			var yc = ((  this.height - offsetY - this.loader.stringArray[i-1][value] / this.yMax * height * 0.9) + 
 			      (  this.height - offsetY - this.loader.stringArray[i][value] / this.yMax * height * 0.9) )/2;
@@ -159,8 +158,7 @@ class Grapher {
 			if (this.timeToPixel ( this.loader.startTime, this.loader.endTime, this.loader.stringArray[this.arrayEnd-1][timestamp], width) >= offsetX)
 			this.context.lineTo( offsetX + this.timeToPixel ( this.loader.startTime, this.loader.endTime, this.loader.stringArray[this.arrayEnd-1][timestamp], width), this.height - offsetY );
 			else
-			this.context.lineTo( offsetX , this.height - offsetY );
-
+			this.context.lineTo( offsetX + this.timeToPixel ( this.loader.startTime, this.loader.endTime, this.loader.stringArray[this.arrayEnd-2][timestamp], width), this.height - offsetY );
 
 			this.context.closePath();
 			this.context.fillStyle = fill;
