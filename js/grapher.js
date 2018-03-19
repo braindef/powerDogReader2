@@ -158,6 +158,9 @@ class Grapher {
 			//to remove the negative values
 			if (this.timeToPixel ( this.loader.startTime, this.loader.endTime, this.loader.stringArray[this.arrayEnd-1][timestamp], width) >= offsetX)
 			this.context.lineTo( offsetX + this.timeToPixel ( this.loader.startTime, this.loader.endTime, this.loader.stringArray[this.arrayEnd-1][timestamp], width), this.height - offsetY );
+			else
+			this.context.lineTo( offsetX , this.height - offsetY );
+
 
 			this.context.closePath();
 			this.context.fillStyle = fill;
