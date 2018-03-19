@@ -81,6 +81,7 @@ class Grapher {
 		var width=this.width*10/12;
 		var height=this.height*10/12;
 
+
 		var offsetX = this.width/12;
 		var offsetY = this.height/12;
 
@@ -107,7 +108,6 @@ class Grapher {
 		var offsetX = this.width/12;
 		var offsetY = this.height/12;
 
-
 		this.context.lineCap = 'round';
 		this.context.lineJoin = 'round';
 
@@ -117,7 +117,6 @@ class Grapher {
 
 
 		this.context.beginPath();
-
 
 		if (solid==true)
 		this.context.moveTo( offsetX + this.timeToPixel ( this.loader.startTime, this.loader.endTime, this.loader.startTime, width ),
@@ -133,8 +132,10 @@ class Grapher {
 			var yc = ((  this.height - offsetY - this.loader.stringArray[i-1][value] / this.yMax * height * 0.9) + 
 			      (  this.height - offsetY - this.loader.stringArray[i][value] / this.yMax * height * 0.9) )/2;
 
+			console.log("xc: " + xc + " yc: " +yc);
 
-			this.context.quadraticCurveTo( xc, yc, 
+			if (xc>=offsetX)
+				this.context.quadraticCurveTo( xc, yc, 
 				offsetX + this.timeToPixel ( this.loader.startTime, this.loader.endTime, this.loader.stringArray[i][timestamp], width ),
 				this.height - offsetY - this.loader.stringArray[i][value] / this.yMax * height * 0.9);
 
@@ -149,6 +150,13 @@ class Grapher {
 		if (solid==true)
 		{
 
+
+			var temp = (parseInt(this.height) - parseInt(offsetY) );
+			
+			console.log( "X: " + (offsetX + this.timeToPixel ( this.loader.startTime, this.loader.endTime, this.loader.stringArray[this.arrayEnd-1][timestamp], width)) + "Y:" +( parseInt(this.height) - parseInt(offsetY)) );
+			
+			//to remove the negative values
+			if (this.timeToPixel ( this.loader.startTime, this.loader.endTime, this.loader.stringArray[this.arrayEnd-1][timestamp], width) >= offsetX)
 			this.context.lineTo( offsetX + this.timeToPixel ( this.loader.startTime, this.loader.endTime, this.loader.stringArray[this.arrayEnd-1][timestamp], width), this.height - offsetY );
 
 			this.context.closePath();
